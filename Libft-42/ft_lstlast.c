@@ -6,13 +6,13 @@
 /*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:25:49 by absaid            #+#    #+#             */
-/*   Updated: 2022/10/19 11:20:19 by absaid           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:54:11 by absaid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_env	*ft_lstlast(t_env *lst)
 {
 	if (!lst)
 		return (NULL);

@@ -6,13 +6,13 @@
 /*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:25:44 by absaid            #+#    #+#             */
-/*   Updated: 2022/10/19 11:17:24 by absaid           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:54:11 by absaid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_env **lst, t_env *new)
 {
 	if (*lst)
 		new -> next = *lst;

@@ -6,13 +6,13 @@
 /*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:25:54 by absaid            #+#    #+#             */
-/*   Updated: 2022/10/19 11:23:18 by absaid           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:54:11 by absaid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_env *lst)
 {
 	int	i;
 

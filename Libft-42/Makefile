@@ -6,7 +6,7 @@
 #    By: absaid <absaid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 07:27:30 by absaid            #+#    #+#              #
-#    Updated: 2023/03/02 21:13:16 by absaid           ###   ########.fr        #
+#    Updated: 2023/03/02 22:16:26 by absaid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ all:$(NAME)
 %.o:%.c libft.h
 	$(CC) $(CFLAGS) -c $<
 
-bonus : $(BONUSOBJS)
+bonus : $(BONUSOBJS) $(NAME)
 	ar cr $(NAME) $(BONUSOBJS) 	
 
 $(NAME):$(OBJS)
