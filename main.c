@@ -6,7 +6,7 @@
 /*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/02 22:49:56 by absaid           ###   ########.fr       */
+/*   Updated: 2023/03/02 23:11:00 by absaid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_env *dupenv(char **env)
 	while(*env)
 	{
 		varandval = subbing(*env);
-		printf("%s=%s\n", varandval[0], varandval[1]);
+		// printf("%s=%s\n", varandval[0], varandval[1]);
 		ft_lstadd_back(&head, ft_lstnew(varandval[0], varandval[1]));
 		env++;
 	}
@@ -59,9 +59,10 @@ int main(int ac, char **av, char **env)
 	
 	myenv = dupenv(env);
 
-	// while(1)
-	// {
-	// 	printf("%s",readline("shelllm9awd>"));
-	// }
+	while(1)
+	{
+		
+		printf("%s\n",readline("minishell>"));
+	}
 
 }
