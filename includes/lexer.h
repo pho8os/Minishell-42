@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:32:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/04 04:10:36 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:00:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef struct s_token
 #define COMMERCE  10
 #define SPACE  11
 #define DOLLAR  12
+#define OPEN_BRACE  13
+#define CLOSE_BRACE  14
+
 
 #define NOT_EXPECT  42
 
