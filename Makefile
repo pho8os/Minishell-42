@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: absaid <absaid@student.42.fr>              +#+  +:+       +#+         #
+#    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/03/02 21:39:17 by absaid           ###   ########.fr        #
+#    Updated: 2023/03/04 04:32:19 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = minishell
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -L/$(shell brew --prefix readline)/lib -lreadline
+CFLAGS = -Wall -Wextra -Werror -L/$(shell brew --prefix readline)/lib -lreadline #-fsanitize=address
 
-SRCS = main.c 
+SRCS = main.c lexing/lexer.c
 
 all: $(NAME)
 

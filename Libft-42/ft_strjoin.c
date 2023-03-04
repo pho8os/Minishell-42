@@ -33,3 +33,24 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	str[j] = '\0';
 	return (str);
 }
+
+char	*ft_strjoin_c(const char *s1, const char *s2)
+{
+	char *str;
+	int i;
+
+	if (!s1)
+		return(ft_substr(s2, 0, 1));
+	if (!s2)
+		return (NULL);
+	str = malloc(ft_strlen(s1) + 2);
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	str[i++] = s2[0];
+	str[i] = '\0';
+	free((void *)s1);
+	return (str);
+}

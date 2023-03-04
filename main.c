@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/02 23:11:00 by absaid           ###   ########.fr       */
+/*   Updated: 2023/03/04 04:33:40 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char **subbing(char *env)
 		if(env[i] == '=')
 			break;
 	varandval = malloc(sizeof(char *) * 2);
+	///
 	varandval[0] = ft_substr(env, 0, i);
 	varandval[1] = ft_substr(env, i + 1, ft_strlen(env + i));
 	if(!ft_strncmp("SHLVL", varandval[0], 6))
@@ -50,19 +51,32 @@ t_env *dupenv(char **env)
 	}
 	return (head);
 }
+void print_tok(t_token *tok)
+{
+	while (tok)
+	{
+		printf("|type = %d|   token = %s\n", tok->type, tok->token);
+		tok = tok->next;
+	}
+	
+}
 
 int main(int ac, char **av, char **env)
 {
-	t_env *myenv;
+	// t_env *myenv;
+	// myenv = dupenv(env);
+	(void)env;
+	char *cmdl;
+	t_token *tok;
 	(void)av;
 	(void)ac;
-	
-	myenv = dupenv(env);
 
 	while(1)
 	{
-		
-		printf("%s\n",readline("minishell>"));
+		cmdl = readline("minishell> ");
+		printf("%s\n",cmdl);
+		tok = lexer(cmdl);
+		print_tok(tok);
 	}
 
 }
