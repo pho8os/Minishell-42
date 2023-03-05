@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:30:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/04 21:29:33 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:34:59 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,18 @@ void get_token_quote(t_token **head ,char *cmdl, size_t *i)
 		addtok(head, newtok(DOUBLEQ, ft_strdup("\"")));
 	*i += 1;
 	j = *i;
-	while (cmdl[*i] != '\'' && cmdl[*i] != '\"' && cmdl[*i])
+	while (cmdl[*i] != cmdl[j - 1] && cmdl[*i])
 		*i += 1;
+	// while (cmdl[*i] != '\'' && cmdl[*i] != '\"' && cmdl[*i])
+	// 	*i += 1;
 	// printf(" j == %d\n", j); //!!!
-	printf(" i get_to == %zu\n", *i); //!!!
+	// printf(" i get_to == %zu\n", *i); //!!!
 	if (*i - j )
 		addtok(head, newtok(TOKEN_WORD, ft_substr((cmdl + j), 0, *i - j)));
 	if (cmdl[*i] == '\'' && cmdl[*i])
 		addtok(head, newtok(SINGLEQ, ft_strdup("\'")));
 	else if (cmdl[*i] == '\"'&& cmdl[*i])
 		addtok(head, newtok(DOUBLEQ, ft_strdup("\"")));
-	// *i += 1;
 }
 
 t_token *lexer(char *cmdl)
@@ -113,22 +114,21 @@ t_token *lexer(char *cmdl)
 	word = NULL;
 	head = NULL;
 	i = -1;
-	// j = 0;
 	while(cmdl[++i] && i < ft_strlen(cmdl))
 	{
 		if ((cmdl[i] == '\'' || cmdl[i] == '\"') && cmdl[i])
 			get_token_quote(&head, cmdl, &i);
-		else if (!ft_strchr("|<>&$\'\" ", cmdl[i]) && cmdl[i])
+		else if (!ft_strchr("|()<>&$\'\" ", cmdl[i]) && cmdl[i])
 		{
-			printf(" i == %zu\n", i); //!!!
-			while(!ft_strchr("|<>&$\'\" ", cmdl[i]) && cmdl[i])
+			// printf(" i == %zu\n", i); //!!!
+			while(!ft_strchr("|()<>&$\'\" ", cmdl[i]) && cmdl[i])
 				word = ft_strjoin_c(word, (cmdl + i++));
 			i--;
-			addtok(&head, newtok(NOT_EXPECT, word));
+			addtok(&head, newtok(TOKEN_WORD, word));
 			word = NULL;	
 			// printf(" cmd == %s\n", word); //!!!
 		}
-		else if (ft_strchr("|<>&$\'\" ", cmdl[i]) && cmdl[i]) //|| !cmdl[i])
+		else if (ft_strchr("|()<>&$\'\" ", cmdl[i]) && cmdl[i])
 			addtok(&head, get_tokens(cmdl, &i));
 	}
 	return (head);
