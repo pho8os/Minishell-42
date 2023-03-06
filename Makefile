@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/03/05 02:11:53 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/03/06 04:23:40 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -L/$(shell brew --prefix readline)/lib -lreadline #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -L/$(shell brew --prefix readline)/lib -lreadline -fsanitize=address -g
 
 SRCS = main.c lexing/lexer.c
 

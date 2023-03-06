@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/04 04:33:40 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/06 04:23:22 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,12 @@ int main(int ac, char **av, char **env)
 	while(1)
 	{
 		cmdl = readline("minishell> ");
+		rl_replace_line("New command", 0);
 		printf("%s\n",cmdl);
 		tok = lexer(cmdl);
 		print_tok(tok);
+		rl_redisplay();
+		add_history(cmdl);
 	}
 
 }

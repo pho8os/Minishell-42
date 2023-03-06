@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:32:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/04 21:00:53 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:51:36 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,33 @@
 
 # include "minishell.h"
 
+typedef enum s_flag
+{
+	WORD = 0,
+	DQ = 1,
+	SQ = 2,
+	PIPE = 3,
+	RIN = 4, 
+	ROUT = 5, 
+	SAND = 6, 
+	POPEN = 7, 
+	PCLOSE = 8, 
+	SPACE = 9,
+	OR = 10,
+	AND = 11,
+	HEREDOC = 12,
+	APPEND = 13,
+	WILDCARD = 14,
+}	e_flag;
+
 typedef struct s_token
 {
-	int				type;
+	e_flag				type;
 	char			*token;
-	struct s_token	*prev;
 	struct s_token	*next;
+	struct s_token	*prev;
 } t_token;
-
-#define TOKEN_WORD  0
-#define TOKEN_PIPE  1
-#define TOKEN_OR  2
-#define TOKEN_AND  3
-#define TOKEN_REDIRECT_INPUT  4
-#define TOKEN_REDIRECT_OUTPUT  5
-#define TOKEN_HERE_DOC  6
-#define TOKEN_REDIRECT_APPEND  7
-#define SINGLEQ  8
-#define DOUBLEQ  9
-#define COMMERCE  10
-#define SPACE  11
-#define DOLLAR  12
-#define OPEN_BRACE  13
-#define CLOSE_BRACE  14
-
-
-#define NOT_EXPECT  42
-
-t_token	*newtok(int type, char *token);
+// t_token	*newtok(e_flag type, char *token):
 t_token *lexer(char *cmdl);
 t_token *test(char *cmdl, int ind, int *i);
 #endif
