@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/03/06 04:23:40 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/03/12 04:13:11 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -L/$(shell brew --prefix readline)/lib -lreadline -fsanitize=address -g
 
-SRCS = main.c lexing/lexer.c
+SRCS = main.c lexing/lexer.c lexing/lexer_lst.c builtins/builtins.c
 
 all: $(NAME)
 

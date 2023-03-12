@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/05 23:06:35 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:52:55 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,21 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <limits.h>
 
+// typedef struct s_list
+// {
+// 	char			*variable;
+// 	char			*value;
+// 	struct s_list	*next;
+// }	t_env;
+
+// typedef struct s_minishell
+// {
+//     t_env *myenv;
+    
+// }t_minishell;
+
+// extern t_minishell g_minishell;
+t_env *dupenv(char **env);
 #endif

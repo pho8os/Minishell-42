@@ -6,50 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:30:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/06 03:08:54 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/12 04:12:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lexer.h"
-
-t_token	*newtok(e_flag type, char *token)
-{
-	t_token	*new;
-
-	new = (t_token *)malloc(sizeof (t_token));
-	if (!new)
-		return (NULL);
-	new->type = type;
-	new->token = token;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
-t_token	*lasttok(t_token *lst)
-{
-	while (lst)
-	{
-		if (lst->next == NULL)
-			break ;
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-void	addtok(t_token **lst, t_token *new)
-{
-	if (!lst)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	new->prev = lasttok(*lst);
-	lasttok(*lst)->next = new;
-	new->next = NULL;
-}
+# include "../includes/minishell.h"
 
 int getflag(char c)
 {

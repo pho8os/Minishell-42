@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:32:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/06 18:51:36 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/12 04:14:50 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ typedef struct s_token
 // t_token	*newtok(e_flag type, char *token):
 t_token *lexer(char *cmdl);
 t_token *test(char *cmdl, int ind, int *i);
+t_token	*newtok(e_flag type, char *token);
+int	lstsize_token(t_token *lst);
+t_token	*lasttok(t_token *lst);
+void	addtok(t_token **lst, t_token *new);
+
 #endif

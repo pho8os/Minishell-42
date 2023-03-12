@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/03 23:14:40 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/12 04:13:51 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <string.h>
-
-typedef struct s_list
+// #include "../includes/minishell.h"
+typedef struct s_env
 {
 	char			*variable;
 	char			*value;
-	struct s_list	*next;
+	struct s_env	*next;
 }	t_env;
+
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
