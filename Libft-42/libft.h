@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/12 04:13:51 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/13 05:23:15 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 void	*ft_memchr(const void *s, int c, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
@@ -67,5 +68,6 @@ void	ft_lstadd_back(t_env **lst, t_env *new);
 int		ft_lstsize(t_env *lst);
 t_env	*ft_lstlast(t_env *lst);
 void	ft_lstclear(t_env **lst);
+t_env *ft_lstchr(t_env *lst, const char *value);
 
 #endif

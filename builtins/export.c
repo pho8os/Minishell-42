@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 23:04:19 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 05:36:28 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
+/*   Updated: 2023/03/13 04:14:52 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
-# include "../Libft-42/libft.h"
-#include "minishell.h"
+# include "../includes/minishell.h"
+//$ echo hdhhdh > $hhh"kkk"
+// $ export AAAAAAA
 
-void test_builting(t_token *tok, t_env **myenv, t_env **myexp); //!!
-void print_env(t_env *envr);
-void pwd(void);
-void cd(const char *path, t_env **myenv, t_env **myexp);
-void export(char **arg, t_env **myenv, t_env **myexp);
-void dupenv(char **env, t_env **myenv, t_env **myexp);
-#endif
+void export(char **arg, t_env **myenv, t_env **myexp)
+{
+    int i;
+    myenv = 0;
+    i = 0;
+    if (!arg[1])
+        while (*myexp)
+        {
+            printf("declare -x %s=\"%s\"\n", (*myexp)->variable, (*myexp)->value);
+            (*myexp) = (*myexp)->next;
+        }
+
+}

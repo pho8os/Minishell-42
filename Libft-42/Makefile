@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: absaid <absaid@student.42.fr>              +#+  +:+       +#+         #
+#    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 07:27:30 by absaid            #+#    #+#              #
-#    Updated: 2023/03/02 22:16:26 by absaid           ###   ########.fr        #
+#    Updated: 2023/03/13 05:29:29 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c \
 ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c 
 
 BONUS = ft_lstadd_front.c ft_lstnew.c ft_lstlast.c ft_lstsize.c ft_lstadd_back.c \
-ft_lstclear.c
+ft_lstclear.c ft_lstchr.c
 
 
 BONUSOBJS = $(BONUS:.c=.o)
