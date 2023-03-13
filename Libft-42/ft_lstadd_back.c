@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:24:58 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/02 21:54:11 by absaid           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:29:57 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-void	ft_lstadd_back(t_env **lst, t_env *new)
+void	addbenv(t_env **lst, t_env *new)
 {
 	t_env	*tmp;
 

@@ -6,14 +6,12 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:32:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/12 04:14:50 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:02:51 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 #define LEXER_H
-
-# include "minishell.h"
 
 typedef enum s_flag
 {

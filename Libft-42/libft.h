@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/13 05:23:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:30:22 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_env	*ft_lstnew(char *variable, char *value);
+t_env	*newenv(char *variable, char *value);
 void	ft_lstadd_front(t_env **lst, t_env *new);
-void	ft_lstadd_back(t_env **lst, t_env *new);
+void	addbenv(t_env **lst, t_env *new);
 int		ft_lstsize(t_env *lst);
 t_env	*ft_lstlast(t_env *lst);
 void	ft_lstclear(t_env **lst);

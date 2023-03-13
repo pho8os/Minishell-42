@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 04:14:52 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:02:37 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 //$ echo hdhhdh > $hhh"kkk"
 // $ export AAAAAAA
 
-void export(char **arg, t_env **myenv, t_env **myexp)
+void export(char **arg, t_varibles *v)
 {
     int i;
-    myenv = 0;
     i = 0;
     if (!arg[1])
-        while (*myexp)
+        while (v->myexp)
         {
-            printf("declare -x %s=\"%s\"\n", (*myexp)->variable, (*myexp)->value);
-            (*myexp) = (*myexp)->next;
+            printf("declare -x %s=\"%s\"\n", v->myexp->variable, v->myexp->value);
+            v->myexp = v->myexp->next;
         }
 
 }

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/13 20:50:29 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
+/*   Updated: 2023/03/13 22:03:50 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+# include "../includes/minishell.h"
 
-// #include "minishell.h"
+void addboth(t_varibles *v, char *variable, char *value, int flag)
+{
+    if (variable && value && flag >= 0)
+        addbenv(&v->myenv, newenv(variable, value));
+    if (variable && value && flag <= 0)
+        addbenv(&v->myexp, newenv(variable, value));   
+}
 
-#endif
+void addvalue(t_varibles *v, char *variable, char *value, int flag)
+{
+    
+}

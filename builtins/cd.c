@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:07 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 05:46:11 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/13 22:01:55 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void cd_execute(const char *path)
         perror(path);
 }
 
-void cd(const char *path, t_env **myenv, t_env **myexp)
+void cd(const char *path, t_varibles *v)
 {
-    if (!ft_lstchr(*myenv, "OLDPWD"))
-    {
-        ft_lstadd_back(myenv, ft_lstnew(ft_strdup("OLDPWD"), getcwd(NULL, 0)));
-        ft_lstadd_back(myexp, ft_lstnew(ft_strdup("OLDPWD"), getcwd(NULL, 0)));
-    }
+    if (!ft_lstchr(v->myenv, "OLDPWD"))
+        addboth(v, ft_strdup("OLDPWD"), getcwd(NULL, 0), 0);
+    else
+        addboth(v, NULL, getcwd(NULL, 0), 0);
+            
     // printf("%s\n", ft_lstchr(*myenv, "OLDPWD")->value);
     if (ft_strncmp("~", path, 1) == 0 || !path)
         cd_execute(getenv("HOME"));

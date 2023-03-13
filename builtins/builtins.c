@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 05:32:43 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:48:07 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ void ft_swap(char **a, char **b)
     *b = c;
 }
 
-void dupenv(char **env, t_env **myenv, t_env **myexp)
+void dupenv(char **env, t_varibles *v)
 {
 	int i;
 	int j;
 	char **subenv;
 	
 	i = -1;
-	*myenv  = NULL;
-	*myexp  = NULL;
+	v->myenv  = NULL;
+	v->myexp  = NULL;
 	while (env[++i])
 	{
 		subenv = subbing(env[i]);
-		ft_lstadd_back(myenv, ft_lstnew(subenv[0], subenv[1]));
+		addbenv(&v->myenv, newenv(subenv[0], subenv[1]));
 	}
 	i = -1;
 	while(env[++i])
@@ -68,31 +68,35 @@ void dupenv(char **env, t_env **myenv, t_env **myexp)
 			if (ft_strcmp(env[i], env[j]) >= 0)
                 ft_swap(&env[i], &env[j]);
 		subenv = subbing(env[i]);
-		ft_lstadd_back(myexp, ft_lstnew(subenv[0], subenv[1]));
+		addbenv(&v->myexp, newenv(subenv[0], subenv[1]));
 	}
 }
 
-void test_builting(t_token *tok, t_env **myenv, t_env **myexp) //!!
+void test_builting(t_varibles *v) //!!
 {
     char **arg;
-    int size_tok = lstsize_token(tok);
+    int size_tok = lstsize_token(v->tok);
     int i = 0;
 
     arg = malloc(sizeof(char *) * (size_tok + 1));
     arg[size_tok] = 0;
-    while (tok)
+    while (v->tok)
     {
-        arg[i++] = tok->token;
-        tok = tok->next;
+        arg[i++] = v->tok->token;
+        v->tok = v->tok->next;
     }
     if (ft_strncmp("pwd", arg[0], 3) == 0)
         pwd();
     else if (ft_strncmp("cd", arg[0], 2) == 0)
-        cd(arg[2], myenv, myexp);
+        cd(arg[2], v);
     else if (ft_strncmp("env", arg[0], 3) == 0)
-        print_env(*myenv);
+        print_env(v->myenv);
     else if (ft_strncmp("export", arg[0], 7) == 0)
-        export(arg, myenv, myexp);
+        export(arg, v);
+	// i = -1;
+	// while(arg[++i])
+	// 	free(arg[i]);
+	// free(arg);		
 }
 
 
