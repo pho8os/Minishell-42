@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 21:48:07 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:22:09 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void dupenv(char **env, t_varibles *v)
 	{
 		subenv = subbing(env[i]);
 		addbenv(&v->myenv, newenv(subenv[0], subenv[1]));
+		free(subenv);
 	}
 	i = -1;
 	while(env[++i])
@@ -69,6 +70,7 @@ void dupenv(char **env, t_varibles *v)
                 ft_swap(&env[i], &env[j]);
 		subenv = subbing(env[i]);
 		addbenv(&v->myexp, newenv(subenv[0], subenv[1]));
+		free(subenv);
 	}
 }
 
@@ -79,24 +81,26 @@ void test_builting(t_varibles *v) //!!
     int i = 0;
 
     arg = malloc(sizeof(char *) * (size_tok + 1));
-    arg[size_tok] = 0;
-    while (v->tok)
+    arg[size_tok] = NULL;
+	t_token *tmp = v->tok;
+    while (tmp)
     {
-        arg[i++] = v->tok->token;
-        v->tok = v->tok->next;
+        arg[i++] = tmp->token;
+        tmp = tmp->next;
     }
+	cleartok(&v->tok);
     if (ft_strncmp("pwd", arg[0], 3) == 0)
         pwd();
     else if (ft_strncmp("cd", arg[0], 2) == 0)
-        cd(arg[2], v);
+        cd(v, arg);
     else if (ft_strncmp("env", arg[0], 3) == 0)
-        print_env(v->myenv);
+        env(v);
     else if (ft_strncmp("export", arg[0], 7) == 0)
-        export(arg, v);
-	// i = -1;
-	// while(arg[++i])
-	// 	free(arg[i]);
-	// free(arg);		
+        export(v , arg);
+	i = -1;
+	while(arg[++i])
+		free(arg[i]);
+	free(arg);	
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/13 21:30:22 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:16:17 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_env
 {
 	char			*variable;
 	char			*value;
+	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
 

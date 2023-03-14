@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 04:12:21 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/12 04:13:38 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:26:46 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,21 @@ void	addtok(t_token **lst, t_token *new)
 	new->prev = lasttok(*lst);
 	lasttok(*lst)->next = new;
 	new->next = NULL;
+}
+
+void	cleartok(t_token **lst)
+{
+	t_token	*tmp;
+	t_token	*t;
+
+	if (!lst)
+		return ;
+	tmp = *lst;
+	while (tmp)
+	{
+		t = tmp;
+		tmp = tmp->next;
+		free(t);
+	}
+	*lst = NULL;
 }

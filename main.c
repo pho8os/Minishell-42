@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/13 21:03:51 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:19:37 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int ac, char **av, char **env)
 	
 	(void)av;
 	(void)ac;
+	(void)env;
 	dupenv(env, &v);
 	while(1)
 	{
@@ -36,11 +37,13 @@ int main(int ac, char **av, char **env)
 		if (cmdl == NULL)
 			break;
 		v.tok = lexer(cmdl);
+		print_tok(v.tok);
 		test_builting(&v);
+		pwd();
 		// rl_replace_line("New command", 0);
-		// print_tok(tok);
 		rl_redisplay();
 		add_history(cmdl);
+		free(cmdl);
 	}
 
 }

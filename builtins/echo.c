@@ -6,7 +6,9 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 02:08:11 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:30:08 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//$ echo hdhhdh > $hhh"kkk"
+// echo -nnnnnnnnnnnnnn

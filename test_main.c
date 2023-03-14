@@ -12,6 +12,15 @@
 // }
 int main()
 {
-    printf("==>%s", getenv("HOME"));
+    t_env *head;
+
+    head = NULL;
+    addbenv (&head, newenv(ft_strdup("1"),ft_strdup("0")));
+    addbenv (&head, newenv(ft_strdup("2"),ft_strdup("0")));
+    // addbenv (&head, newenv(ft_strdup("3"),ft_strdup("0")));
+    // addbenv (&head, newenv(ft_strdup("4"),ft_strdup("0")));
+
+    delone_env(&head);
+    printf("%s\n", head->variable);
 
 }

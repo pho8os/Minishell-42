@@ -6,23 +6,26 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 21:02:37 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:42:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/minishell.h"
-//$ echo hdhhdh > $hhh"kkk"
 // $ export AAAAAAA
-
-void export(char **arg, t_varibles *v)
+// export a+=g
+//$ export AAA+PPP
+//bash: export: `AAA+PPP': not a valid identifier
+//$ export A="                AA+7=8"
+//bash: export: `=                AA+7=8': not a valid identifier
+//$ export A=                AA+7=8
+//bash: export: `=                AA+7=8': not a valid identifier
+void export(t_varibles *v, char **arg)
 {
     int i;
+    
     i = 0;
     if (!arg[1])
-        while (v->myexp)
-        {
-            printf("declare -x %s=\"%s\"\n", v->myexp->variable, v->myexp->value);
-            v->myexp = v->myexp->next;
-        }
-
+        print_env(v->myexp, "declare -x ", -1);
+    
+    // ft_lstclear(&v->myexp);
 }
