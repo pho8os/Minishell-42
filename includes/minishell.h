@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/13 21:02:12 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/15 22:58:14 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_varibles
 {
 	t_token *tok;
 	t_env *myenv;
-	t_env *myexp;
 }	t_varibles;
 
 #endif

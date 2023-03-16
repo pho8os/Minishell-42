@@ -6,7 +6,15 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:15 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/13 02:08:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/15 02:22:06 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "../includes/minishell.h"
+
+void exit_status(t_varibles *v, char **arg)
+{
+    (void)v;
+    (void)arg;
+    exit(0);
+}

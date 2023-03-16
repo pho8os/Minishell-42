@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 04:12:21 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/14 19:26:46 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/16 01:35:43 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ int	lstsize_token(t_token *lst)
 	i = 0;
 	while (lst)
 	{
+		if (lst->type == WORD)
+			i++;
 		lst = lst->next;
-		i++;
 	}
 	return (i);
 }

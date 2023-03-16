@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:13 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/14 20:25:52 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/15 22:55:17 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void    env(t_varibles *v)
 {
-    print_env(v->myenv, "", 1);
+    print_env(v->myenv, 1);
 }

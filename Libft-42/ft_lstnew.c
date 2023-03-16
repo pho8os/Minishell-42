@@ -6,13 +6,13 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:25:51 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/14 22:16:35 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/15 23:05:04 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-t_env	*newenv(char *variable, char *value)
+t_env	*newenv(char *variable, char *value, int prenv)
 {
 	t_env	*node;
 
@@ -20,7 +20,8 @@ t_env	*newenv(char *variable, char *value)
 	if (!node)
 		return (NULL);
 	node -> variable = variable;
-	node-> value = value;
+	node -> value = value;
+	node -> prenv = prenv;
 	node -> prev = NULL;
 	node -> next = NULL;
 	return (node);

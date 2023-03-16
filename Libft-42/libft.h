@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/14 22:16:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/03/16 04:30:02 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_env
 {
 	char			*variable;
 	char			*value;
+	int prenv;
 	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
@@ -40,6 +41,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 char	*ft_itoa(int n);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strjoin_c(const char *s1, const char *s2);
+char	*ft_strjoin_sp(char const *s1, char const *s2, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
@@ -63,12 +65,14 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_env	*newenv(char *variable, char *value);
+t_env	*newenv(char *variable, char *value, int prenv);
 void	ft_lstadd_front(t_env **lst, t_env *new);
 void	addbenv(t_env **lst, t_env *new);
 int		ft_lstsize(t_env *lst);
 t_env	*ft_lstlast(t_env *lst);
 void	ft_lstclear(t_env **lst);
+void delone_env(t_env **env);
+void	addexport(t_env **lst, t_env *new);
 t_env *ft_lstchr(t_env *lst, const char *value);
 
 #endif

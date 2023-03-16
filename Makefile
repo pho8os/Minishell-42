@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/03/14 19:04:57 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/03/15 02:34:54 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(OBJS) Libft-42/libft.a
 	$(CC) $(CFLAGS) -L $(READLINE_PATH)/lib -lreadline -o $(NAME) $^
 
 %.o: %.c $(HEDER) 
-	$(CC) $(CFLAGS) -I $(READLINE_PATH)/include -c $< -o $@
+	$(CC) $(CFLAGS) -I $(READLINE_PATH)/include -c $< -o $@ 
 
 clean:
 	rm -f $(OBJS)
