@@ -6,32 +6,28 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:04:19 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/16 01:41:59 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/01 06:54:49 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-typedef struct s_varibles t_varibles;
-typedef struct s_env t_env;
+void	dupenv(t_env **myenv, char **env);
+char	**subbing(char *env);
+int	    builting(t_env *myenv, char **arg);
 
-void test_builting(t_varibles *v); //!!
-
-void    env(t_varibles *v);
-void pwd(void);
-void dupenv(char **env, t_varibles *v);
-void cd(t_varibles *v, char **arg);
-void unset(t_varibles *v, char **arg);
-void export(t_varibles *v, char **arg);
-void exit_status(t_varibles *v, char **arg);
-void echo(t_varibles *v, char **arg);
-void delone_env(t_env **env);
-char **subbing(char *env);
+void	env(t_env *myenv);
+void	pwd(t_env *myenv);
+void	cd(t_env *myenv, char **arg);
+void	unset(t_env *myenv, char **arg);
+void	export(t_env *myenv, char **arg);
+void	ft_exit(t_env *myenv, char **arg);
+void	echo(t_env *myenv, char **arg);
 
 //utils
-void print_arg(char **arg); //!!
-void print_env(t_env *env, int flag);
-void addvalue(t_varibles *v, const char *variable, char *value);
-
+void	print_export(t_env *myenv);
+void	builtins_error(const char *cmd, const char *arg, const char *msg);
+void	free_tab(char **str);
+void	print_arg(char **arg); //!!
 #endif

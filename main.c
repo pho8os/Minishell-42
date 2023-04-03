@@ -6,21 +6,99 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/16 04:11:04 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:21:43 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "include/minishell.h"
 
+// void print_tok(t_token *tok) //!!
+// {
+// 	t_token *tmp;
+
+// 	while (tok)
+// 	{
+		
+// 			// printf("len = %d\n", size_down(tok));
+// 		tmp = tok->down;
+// 		printf("\n!%s! |type = %d| |exp = %d|\n", tok->token, tok->type, tok->change);
+// 		while (tmp)
+// 		{
+// 			printf("** !%s! |type = %d| |exp = %d| **", tmp->token, tmp->type, tmp->change);
+// 			tmp = tmp->down;
+// 		}
+// 		puts("\n-----------");
+// 		tok = tok->next;
+// 	}
+// 		// puts("\n-----------");
+	
+// }
 void print_tok(t_token *tok) //!!
 {
+	t_token *tmp;
+
 	while (tok)
 	{
-		printf("!%s! |type = %d|   *=*   ", tok->token, tok->type);
+		
+			// printf("len = %d\n", size_down(tok));
+		tmp = tok->down;
+		printf("\n!%s! |type = %d| |exp = %d|\n", tok->token, tok->type, tok->expand);
+		while (tmp)
+		{
+			printf("** !%s! |type = %d| |exp = %d| **", tmp->token, tmp->type, tmp->expand);
+			tmp = tmp->down;
+		}
+		puts("\n-----------");
 		tok = tok->next;
 	}
-	puts("\n");
+		// puts("\n-----------");
 	
+}
+
+void print_down(t_token *tok)
+{
+	t_token *tmp;
+	// while (tok->type != END)
+	while (tok && tok->type != END)
+	{
+		tmp = tok->down;
+		printf("|type = %d| ", tok->type);
+		printf("%s",tok->token);
+		while (tmp)
+		{
+			printf("%s",tmp->token);
+			tmp = tmp->down;
+		}
+		printf(" ");
+		tok = tok->next;
+	}
+	printf("\n\n");
+	
+}
+
+void print_tree(t_ast *ast, int sp)
+{
+	if (!ast)
+		return ;
+	sp += 10;
+	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
+		print_tree(((t_operator * )ast)->right, sp);	
+	if (ast->type == PAR)
+		print_tree(((t_subsh *)ast)->sub, sp);
+	if (ast->type == REDIR)
+        print_tree(((t_redr *)ast)->trdr, sp);	
+	for (int i = 10; i < sp; i++)
+        printf(" ");
+	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
+		printf("type = %d   %s\n\n", ast->type, ((t_operator * )ast)->op);
+	else if (ast->type == PAR)
+		printf("type = %d (  )\n\n", ast->type);
+	else if (ast->type == REDIR)
+		printf("type = %d >?\n\n", ast->type);
+	else
+		print_down(((t_command *)ast)->list);
+	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
+		print_tree(((t_operator * )ast)->left, sp);
 }
 
 int main(int ac, char **av, char **env)
@@ -28,25 +106,27 @@ int main(int ac, char **av, char **env)
 	char *cmdl;
 	t_varibles v;
 	
+	
 	(void)av;
 	(void)ac;
 	(void)env;
-	dupenv(env, &v);
+	// dupenv(&v.myenv, env);
 	while(1)
 	{
 		cmdl = readline("minishell> ");
 		if (cmdl == NULL)
 			break;
-		v.tok = lexer(cmdl);
-		puts("*====================================*\n");
+		v.tok = tokenizer(cmdl);	
+		// v.tok = lexer(cmdl);
 		print_tok(v.tok);
-		puts("*====================================*");
-		pwd();
-		test_builting(&v);
-		// rl_replace_line("New command", 0);
-		rl_redisplay();
+		v.ast = parser(&v.tok);
+		// execution(&v.ast, v.myenv);
+		// printf("%s", cmdl);
 		add_history(cmdl);
+		// test_builting(&v);
+		print_tree(v.ast, 0);
+		// rl_redisplay();
+		// rl_replace_line("New command", 0);
 		free(cmdl);
 	}
-
 }

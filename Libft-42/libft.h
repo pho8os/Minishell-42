@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/16 04:30:02 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/01 07:18:09 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <string.h>
-// #include "../includes/minishell.h"
 typedef struct s_env
 {
 	char			*variable;
 	char			*value;
 	int prenv;
+	int print;
 	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
@@ -33,7 +33,7 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
-size_t	ft_strlen(const char *str);
+int	ft_strlen(const char *str);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -62,8 +62,8 @@ char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(const char *s, int fd);
+void	ft_putstr_fd(const char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 t_env	*newenv(char *variable, char *value, int prenv);
 void	ft_lstadd_front(t_env **lst, t_env *new);
@@ -73,6 +73,6 @@ t_env	*ft_lstlast(t_env *lst);
 void	ft_lstclear(t_env **lst);
 void delone_env(t_env **env);
 void	addexport(t_env **lst, t_env *new);
-t_env *ft_lstchr(t_env *lst, const char *value);
+t_env *ft_lstchr(t_env *lst, const char *variable);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/16 01:42:05 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/01 07:25:24 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+# include "minishell.h"
 
-void print_arg(char **arg)
+void print_arg(char **arg) //!!!
 {
 	int i = -1;
 	while (arg[++i])
@@ -21,11 +21,21 @@ void print_arg(char **arg)
 	}
 }
 
+void free_tab(char **str) //!!!
+{
+    int i;
+    
+    i = -1;
+    while (str[++i])
+        free(str[i]);
+    free(str);
+}
+
 void swap_data(t_env *a, t_env  *b)
 {
     int tm;
     char *c;
-    
+
     c = a->variable;
     a->variable = b->variable;
     b->variable = c;
@@ -37,35 +47,41 @@ void swap_data(t_env *a, t_env  *b)
     b->prenv = tm;
 }
 
-void print_env(t_env *env, int flag)
+
+void print_export(t_env *myenv)
 {
+    t_env *exp;
     t_env *tmp;
     
-    while (env && flag == 1)
+    exp = NULL;
+    while (myenv)
     {
-        // if (env->prenv)
-            printf("%s=%s\n", env->variable, env->value);
-        env = env->next;
+        addbenv(&exp, newenv(myenv->variable, myenv->value, myenv->prenv));
+        myenv = myenv->next;
     }
-    while (env && flag == -1)
+    while (exp)
     {
-        tmp = env;
+        tmp = exp;
         while (tmp)
         {
-            if (ft_strcmp(env->variable, tmp->variable) >= 0)
-                swap_data(env, tmp);
+            if (ft_strcmp(exp->variable, tmp->variable) >= 0)
+                swap_data(exp, tmp);
             tmp = tmp->next;
         }
-        printf("declare -x %s=\"%s\"\n", env->variable, env->value);
-        env = env->next;
-    }   
+        if (exp->prenv > 0)
+            printf("declare -x %s=\"%s\"\n", exp->variable, exp->value);
+        else if (exp->prenv != -1)
+            printf("declare -x %s\n", exp->variable);
+        exp = exp->next;
+    }
 }
 
-void addvalue(t_varibles *v, const char *variable, char *value)
+void builtins_error(const char *cmd, const char *arg, const char *msg)
 {
-    t_env *find;
-    
-    find = ft_lstchr(v->myenv, variable);
-    free(find->value);
-    find->value = value;
+    ft_putstr_fd ("bash : ", STDERR_FILENO);
+    ft_putstr_fd (cmd, STDERR_FILENO);
+    ft_putstr_fd (" : ", STDERR_FILENO);
+    ft_putstr_fd (arg, STDERR_FILENO);
+    ft_putstr_fd(" ", STDERR_FILENO);
+    ft_putstr_fd (msg, STDERR_FILENO);
 }

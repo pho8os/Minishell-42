@@ -6,16 +6,12 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/16 05:45:53 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/01 06:52:31 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
-
+# include "minishell.h"
 //$ echo hdhhdh > $hhh"kkk"
-// echo -nnnnnnnnnnnnnn
-//echo -nnnnn -nnnnn  -nnnnnn     -nnnnnnnnnnn -nn -n -n -n yas
-//echo -nnnnn -nnnnn  -nnnnnn     -nnnn-nnnnnnn -nn -n -n -n yas
 int valid_option(char *arg)
 {
     int i;
@@ -31,23 +27,24 @@ int valid_option(char *arg)
     return (1);
 }
 
-void echo(t_varibles *v, char **arg)
+void echo(t_env *myenv, char **arg)
 {
-    (void)v;
     int i;
     char *str;
     
-    i = -1;
+    exit_status(myenv, 0);
+    if (!arg[1])
+        return (ft_putendl_fd("", 1));
     str = NULL;
+    i = 0;
     while (arg[++i])
     {
-        if (valid_option(arg[0]) && !valid_option(arg[i]))
+        if (valid_option(arg[1]) && !valid_option(arg[i]))
             str = ft_strjoin_sp(str, arg[i], ' ');
-        else if (!valid_option(arg[0]))
+        else if (!valid_option(arg[1]))
             str = ft_strjoin_sp(str, arg[i], ' ');
     }
-    if (valid_option(arg[0]))`
-        ft_putstr_fd(str, 1);
-    else        
-        ft_putendl_fd(str, 1);
+    if (valid_option(arg[1]))
+        return (ft_putstr_fd(str, 1), free(str));
+    return (ft_putendl_fd(str, 1), free(str));
 }

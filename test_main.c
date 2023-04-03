@@ -1,26 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_main.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/29 02:58:56 by yettabaa          #+#    #+#             */
+/*   Updated: 2023/03/29 03:32:36 by yettabaa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/minishell.h"
 
-// int main()
-// {
-//     char pwd[PATH_MAX];
-//     getcwd(pwd, PATH_MAX);
-//     chdir("cd");
-//     getcwd(pwd, PATH_MAX);
-//     // char *str;
-//     // str = getenv("PATH");
-//     printf("%s\n", pwd);
-// }
-int main()
+int	main(void)
 {
-    t_env *head;
+	t_token	*head;
+	int		i;
+	int		f;
+    
+    f= 0;
+	head = NULL;
+    for (int j = 0; j < 10; j++)
+	    (!f) && (i++);
 
-    head = NULL;
-    addbenv (&head, newenv(ft_strdup("1"),ft_strdup("0")));
-    addbenv (&head, newenv(ft_strdup("2"),ft_strdup("0")));
-    // addbenv (&head, newenv(ft_strdup("3"),ft_strdup("0")));
-    // addbenv (&head, newenv(ft_strdup("4"),ft_strdup("0")));
-
-    delone_env(&head);
-    printf("%s\n", head->variable);
-
+    
+	// addtok(&head, newtok(0, ft_strdup("1"), 0));
+	// addtok(&head, newtok(0, ft_strdup("2"), 0));
+	// addtok_down(&head, newtok(0, ft_strdup("1*"), 0));
+	// addtok_down(&head, newtok(0, ft_strdup("2*"), 0));
+	// addtok_down(&head, newtok(0, ft_strdup("3*"), 0));
+	// addtok(&head, newtok(0, ft_strdup("3"), 0));
+	// printf("%s\n", head->next->down->down->down->token);
+    printf("%d\n", i);
 }

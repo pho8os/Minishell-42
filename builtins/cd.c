@@ -6,42 +6,62 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:07 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/16 01:53:12 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/01 08:04:46 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
-//unset OLDPWD
-// cd -
-//cd ~
-void execd(t_varibles *v, const char *path)
+# include "minishell.h"
+
+char *cd_env(t_env *myenv, const char *variable, char *pwd, int flag)
 {
-    int ret;
-    
-    addvalue(v, "OLDPWD", getcwd(NULL, 0));
-    if (!path)
-        return ;
-    ret = chdir(path);
-    if (ret != 0)
-        perror(path);
+    t_env *find;
+
+    find = ft_lstchr(myenv, variable);
+    if (!find)
+    {
+        if (flag)
+            addbenv(&myenv, newenv(ft_strdup(variable), pwd, 1));
+        return(NULL);
+    }
+    if (flag)
+    {
+        free(find->value);
+        find->value = pwd; 
+    }
+    return (find->value);
 }
 
-void cd(t_varibles *v, char **arg)
+void execd(t_env *myenv, const char *path, const char *var)
+{
+    int ret;
+    char *pwd;
+
+    if (!path)
+        return (builtins_error("cd", var, "not set\n"));
+    pwd = getcwd(NULL, 0);
+    if (!pwd)
+        perror("");   
+    ret = chdir(path);
+    if (ret != 0)
+        return (perror(path));
+    cd_env(myenv, "OLDPWD", pwd, 1);
+    cd_env(myenv, "PWD", getcwd(NULL, 0), 1);
+}
+
+void cd(t_env *myenv, char **arg)
 {
     char *oldpwd;
-    print_arg(arg);
     
-    if (!ft_lstchr(v->myenv, "HOME") && !arg[1])
-        return (ft_putendl_fd("home not set", 1));
-    if (!ft_lstchr(v->myenv, "OLDPWD"))
-        addbenv(&v->myenv, newenv(ft_strdup("OLDPWD"), getcwd(NULL, 0), 0));
-    if ((!arg[0]))
-        return (execd(v, ft_lstchr(v->myenv, "HOME")->value));
-    if (!ft_memcmp("~", arg[0], 2))
-        return (execd(v, ft_lstchr(v->myenv, "HOME")->value));
-    oldpwd = ft_strdup(ft_lstchr(v->myenv, "OLDPWD")->value);
-    // printf("== >%s\n", ft_lstchr(v->myenv, "OLDPWD")->value);
-    if (!ft_memcmp("-", arg[0], 2))
-        return (execd(v, oldpwd), free(oldpwd));
-    return(execd(v, arg[0]), free(oldpwd));
+    // print_arg(arg);
+    if (!ft_memcmp("~", arg[1], 2) || !arg[1])
+        return (execd(myenv, cd_env(myenv, "HOME", NULL, 0), "HOME"));
+    if (!ft_memcmp("-", arg[1], 2))
+    {
+        oldpwd = ft_strdup(cd_env(myenv, "OLDPWD", NULL, 0));
+        execd(myenv, oldpwd, "OLDPWD");
+        if (oldpwd)
+            return (printf("%s\n", oldpwd), free(oldpwd));
+        return ;    
+    }
+    return(execd(myenv, arg[1], ""));
 }

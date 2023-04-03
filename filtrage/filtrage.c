@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   filtrage.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/15 22:58:14 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/03/24 05:45:47 by yettabaa          #+#    #+#             */
+/*   Updated: 2023/03/30 22:16:14 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+# include "minishell.h"
 
-# include "lexer.h"
-# include "parser.h"
-# include "executor.h"
-# include "builtins.h"
-# include "../Libft-42/libft.h"
-# include "readline/readline.h"
-# include "readline/history.h"
-# include <stdbool.h>
-# include <limits.h>
-
-typedef struct s_varibles
+void filtrage(t_token *tok)
 {
-	t_token *tok;
-	t_env *myenv;
-}	t_varibles;
-
-#endif
+    
+}

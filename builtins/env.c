@@ -6,13 +6,19 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:13 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/15 22:55:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/01 07:25:58 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+# include "minishell.h"
 
-void    env(t_varibles *v)
+void    env(t_env *myenv)
 {
-    print_env(v->myenv, 1);
+    exit_status(myenv, 0);
+    while (myenv)
+    {
+        if (myenv->prenv > 0)
+            printf("%s=%s\n", myenv->variable, myenv->value);
+        myenv = myenv->next;
+    } 
 }

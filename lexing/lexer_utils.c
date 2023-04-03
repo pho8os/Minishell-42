@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/13 20:50:29 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/03/23 04:34:18 by yettabaa          #+#    #+#             */
+/*   Updated: 2023/03/30 22:15:02 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+# include "minishell.h"
 
-// #include "minishell.h"
-
-#endif
+int chek_back(char *str, char c, int star, int end)
+{
+    while (star >= end)
+    {
+        if (str[star] == c)
+            return (0);
+        star--; 
+    }
+    return(1);
+}
