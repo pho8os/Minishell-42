@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 07:13:45 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:59:30 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void print_tree(t_ast *ast, int sp)
 	else if (ast->type == PAR)
 		printf("type = %d (  )\n\n", ast->type);
 	else if (ast->type == REDIR)
-		printf("type = %d >?\n\n", ast->type);
+		printf("type = %d arg = %s in = %d out %d \n\n", ((t_redir *)ast)->typeredir, ((t_redir *)ast)->tok->token, ((t_redir *)ast)->fd_in , ((t_redir *)ast)->fd_out);
 	else
 		print_down(((t_command *)ast)->list);
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
@@ -106,11 +106,8 @@ int main(int ac, char **av, char **env)
 	char *cmdl;
 	t_varibles v;
 	
-	
 	(void)av;
 	(void)ac;
-	(void)env;
-
 	dupenv(&v.myenv, env);
 	while(1)
 	{
@@ -118,15 +115,15 @@ int main(int ac, char **av, char **env)
 		if (cmdl == NULL)
 			break;
 		v.tok = tokenizer(cmdl);	
-		// v.tok = lexer(cmdl);
 		// print_tok(v.tok);
-		add_history(cmdl);
 		v.ast = parser(&v.tok);
+		print_tree(v.ast, 0);
+		execution(&v.ast, v.myenv);
+		// puts("ss");
+		// add_history(cmdl);
 		// printf("== > %d\n", ((t_redr *)v.ast)->trdr->type);
-		// execution(&v.ast, v.myenv);
 		// printf("%s", cmdl);
 		// test_builting(&v);
-		print_tree(v.ast, 0);
 		// rl_redisplay();
 		// rl_replace_line("New command", 0);
 		free(cmdl);

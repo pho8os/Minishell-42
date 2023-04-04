@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 05:50:14 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:31:51 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void dupenv(t_env **myenv, char **env)
 	i = -1;
 	if (!env[0])
 		return(addbenv(myenv, newenv(ft_strdup("PWD"), getcwd(NULL, 0), 1)),
-		 addbenv(myenv, newenv(ft_strdup("SHLVL"), ft_strdup("1"), 1)),
+		addbenv(myenv, newenv(ft_strdup("SHLVL"), ft_strdup("1"), 1)),
 		ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1)));
 	while (env[++i])
 	{

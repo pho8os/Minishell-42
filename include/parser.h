@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:35:04 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 07:11:33 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 08:02:22 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_redir
 	int fd_in;
 	int fd_out;
 	int flags;
-	t_token	*arg;
+	char *arg;
+	t_token	*tok;
 	t_ast	*trdr;
 }			t_redir;
 

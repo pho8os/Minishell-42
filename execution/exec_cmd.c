@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 06:13:13 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 09:32:09 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char **trans_myenv(t_env *myenv)
     env[len] = 0;
     while (myenv)
     {
-        env[i++] = ft_strjoin_sp(myenv->variable, myenv->value, '=');
+        (myenv->print) && (env[i++] = ft_strjoin_sp(myenv->variable, myenv->value, '='));
         myenv = myenv->next;
     }
     return (env);
@@ -102,7 +102,7 @@ void exec_cmd(t_ast **ast, t_env *myenv)
         perror(arg[0]); //!!!!
         exit(127);
     }
-    waitpid(pid, &stat, 0);
+    waitpid(pid, &stat, WUNTRACED);
     exit_status(myenv, WEXITSTATUS(stat));
     // printf("\n=== >%d\n", WEXITSTATUS(stat));
     // int i = -1;

@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/04/04 07:13:01 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/04 08:22:03 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = main.c \
 lexing/lexer_utils.c lexing/tokenizer.c \
 parsing/ast_const.c parsing/parser.c parsing/parser_util.c parsing/heredoc.c \
 builtins/builtins.c builtins/pwd.c builtins/export.c builtins/echo.c builtins/cd.c builtins/utils.c builtins/unset.c builtins/env.c builtins/exit.c \
-execution/execution.c execution/exec_pipe.c execution/exec_cmd.c execution/expand.c 
+execution/execution.c execution/exec_pipe.c execution/exec_cmd.c execution/expand.c execution/exec_redir.c
 #lexing/lexer.c lexing/lexer_lst.c lexing/lexer_utils.c\
 
 OBJS=$(SRCS:.c=.o)

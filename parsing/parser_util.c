@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 00:51:54 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 07:12:35 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 08:32:52 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ t_ast *redire_info(t_token **tok)
     if(type == ROUT || type == APPEND)
         ((t_redir *)redir)->flags = O_CREAT | O_WRONLY | ((type == ROUT) * O_TRUNC + !(type == RIN) * O_APPEND);
     *tok = (*tok)->next;
-    ((t_redir *)redir)->arg = *tok; // join and change in char * in heder
+    ((t_redir *)redir)->tok = *tok; // join and change in char * in heder
+    ((t_redir *)redir)->arg = join_tokens(*tok); // join and change in char * in heder
     (type == HEREDOC) && (((t_redir *)redir)->fd_in = heredoc(join_tokens(*tok)));    
     *tok = (*tok)->next;
     return (redir);
