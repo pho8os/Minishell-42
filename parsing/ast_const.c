@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:15 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/03 09:17:08 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 06:45:03 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_ast	*new_oper(int type, t_ast *left, t_ast *right, char *op)
 
 t_ast *new_reder(void)
 {
-    t_redr *redirection;
+    t_redir *redirection;
     
-    redirection = malloc(sizeof(t_redr));
+    redirection = malloc(sizeof(t_redir));
     if (!redirection)
         return (NULL);
     redirection->type =  REDIR;

@@ -5,20 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 04:34:18 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/03/30 22:15:02 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/03/06 04:27:20 by absaid            #+#    #+#             */
+/*   Updated: 2023/04/04 02:18:32 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "lexer.h"
 
-int chek_back(char *str, char c, int star, int end)
+#include "minishell.h"
+
+t_token *ft_newtoken(e_flag type, char *word, int flag, int hdoc)
 {
-    while (star >= end)
-    {
-        if (str[star] == c)
-            return (0);
-        star--; 
-    }
-    return(1);
+	t_token *token;
+
+	token = malloc(sizeof(t_token ));
+	token->token = word;
+	token->type = type;
+	token->next = NULL;
+	token->prev = NULL;
+	token->down = NULL;
+	token->expand = false;
+	token->hdoc = false;
+	(flag) && (token->expand = true);
+	(hdoc) && (token->hdoc = true);
+	return(token);
+}
+
+t_token	*lasttok(t_token *lst)
+{
+	if(!lst)
+		return NULL;
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	addtok(t_token **lst, t_token *new)
+{
+	if (!lst)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	new->prev = lasttok(*lst);
+	lasttok(*lst)->next = new;
+	new->next = NULL;
+}
+
+t_token	*lasttok_down(t_token *lst)
+{
+	while (lst)
+	{
+		if (lst->down == NULL)
+			break ;
+		lst = lst->down;
+	}
+	return (lst);
+}
+
+int	size_token(t_token *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

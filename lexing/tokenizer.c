@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:30:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/02 03:30:19 by absaid           ###   ########.fr       */
+/*   Updated: 2023/04/04 02:21:19 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ t_token *tokenizer(char *c)
 		}
 	}
 	if(sq || dq)
-		return(puts("Syntax : quote unfound"), exit(1), NULL);
+		return(puts("Syntax : quote unfound"), NULL);
 	addtok(&token, ft_newtoken(END, NULL, 0, 0));
 	return(token);
 	

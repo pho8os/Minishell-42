@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 07:25:24 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 05:42:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ void print_arg(char **arg) //!!!
 	}
 }
 
-void free_tab(char **str) //!!!
-{
-    int i;
-    
-    i = -1;
-    while (str[++i])
-        free(str[i]);
-    free(str);
-}
-
 void swap_data(t_env *a, t_env  *b)
 {
     int tm;
@@ -42,11 +32,10 @@ void swap_data(t_env *a, t_env  *b)
     c = a->value;
     a->value = b->value;
     b->value = c;
-    tm = a->prenv;
-    a->prenv = b->prenv;
-    b->prenv = tm;
+    tm = a->print;
+    a->print = b->print;
+    b->print = tm;
 }
-
 
 void print_export(t_env *myenv)
 {
@@ -56,7 +45,7 @@ void print_export(t_env *myenv)
     exp = NULL;
     while (myenv)
     {
-        addbenv(&exp, newenv(myenv->variable, myenv->value, myenv->prenv));
+        addbenv(&exp, newenv(myenv->variable, myenv->value, myenv->print));
         myenv = myenv->next;
     }
     while (exp)
@@ -68,9 +57,9 @@ void print_export(t_env *myenv)
                 swap_data(exp, tmp);
             tmp = tmp->next;
         }
-        if (exp->prenv > 0)
+        if (exp->print > 0)
             printf("declare -x %s=\"%s\"\n", exp->variable, exp->value);
-        else if (exp->prenv != -1)
+        else if (exp->print == 0)
             printf("declare -x %s\n", exp->variable);
         exp = exp->next;
     }

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:22 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 06:50:44 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 05:24:03 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void unset_var(t_env *myenv, char *var)
     {
         tmp = ft_lstchr(myenv, var);
         if (tmp)
-            delone_env(&tmp);
+            tmp->print = -2;
         myenv = myenv->next;
     }
 }

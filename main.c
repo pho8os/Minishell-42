@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/03 09:21:43 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 07:13:45 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void print_tree(t_ast *ast, int sp)
 	if (ast->type == PAR)
 		print_tree(((t_subsh *)ast)->sub, sp);
 	if (ast->type == REDIR)
-        print_tree(((t_redr *)ast)->trdr, sp);	
+        print_tree(((t_redir *)ast)->trdr, sp);	
 	for (int i = 10; i < sp; i++)
         printf(" ");
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
@@ -110,7 +110,8 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	(void)env;
-	// dupenv(&v.myenv, env);
+
+	dupenv(&v.myenv, env);
 	while(1)
 	{
 		cmdl = readline("minishell> ");
@@ -118,11 +119,12 @@ int main(int ac, char **av, char **env)
 			break;
 		v.tok = tokenizer(cmdl);	
 		// v.tok = lexer(cmdl);
-		print_tok(v.tok);
+		// print_tok(v.tok);
+		add_history(cmdl);
 		v.ast = parser(&v.tok);
+		// printf("== > %d\n", ((t_redr *)v.ast)->trdr->type);
 		// execution(&v.ast, v.myenv);
 		// printf("%s", cmdl);
-		add_history(cmdl);
 		// test_builting(&v);
 		print_tree(v.ast, 0);
 		// rl_redisplay();

@@ -1,3 +1,8 @@
--bedel smiat
--handl /bin/ls
--exit(1) in pipe 
+- 
+- redirections
+- t_operator op 7yedha
+- handl /bin/ls
+- ac av in main
+- bedel smiat
+- exit(1) in pipe 
+- syntax error

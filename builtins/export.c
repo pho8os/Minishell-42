@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 06:46:50 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 05:40:46 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,16 @@ void addvalue(t_env *myenv, char **sub, int prenv, int flag)
     t_env *find;
     
     tri = ft_strtrim(sub[0], "+");
-    free(sub[0]);
     find = ft_lstchr(myenv, tri);
     if (!prenv && find)
-        return (free(tri), free(sub[1]));
+        return ;
     if (!find)
         return (addbenv(&myenv, newenv(tri, sub[1], prenv)));
-    find->prenv = 1;    
+    find->print = 1;    
     oldval = (find->value);
-    free(tri);
     if (!flag)
-        return(find->value = sub[1], free(oldval));
-    return(find->value = ft_strjoin(oldval, sub[1]), free(sub[1]));  
+        return(find->value = sub[1], free(NULL));
+    return(find->value = ft_strjoin(oldval, sub[1]), free(NULL));
 }
 
 void export(t_env *myenv, char **arg)
@@ -67,9 +65,9 @@ void export(t_env *myenv, char **arg)
             builtins_error("export: ", arg[i], ": not a valid identifier\n"); //ther is leaks here
             exit_status(myenv, 1);
         }
-        else if (check_id(sub[0], arg[i]) == 1 && !ft_strchr(arg[i], '='))   
+        else if (check_id(sub[0], arg[i]) && !ft_strchr(arg[i], '='))   
             addvalue(myenv,  sub, 0, 0);
-        else if (check_id(sub[0], arg[i]) == 1 && ft_strchr(arg[i], '='))
+        else if (check_id(sub[0], arg[i]) && ft_strchr(arg[i], '='))
             addvalue(myenv,  sub, 1, 0);
         else if (check_id(sub[0], arg[i]) == -1)   
             addvalue(myenv,  sub, 1, 1);

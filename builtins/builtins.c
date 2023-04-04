@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 07:24:33 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 05:50:14 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char **subbing(char *env)
 	varandval[0] = ft_substr(env, 0, i);
 	varandval[1] = ft_substr(env, i + 1, ft_strlen(env + i));
 	varandval[2] = NULL;
-	if(!ft_strncmp("SHLVL", varandval[0], 6))
+	if(!ft_memcmp("SHLVL", varandval[0], 6))
 	{
 		i = ft_atoi(varandval[1]);
 		(i >= 0) && (i++);
@@ -48,14 +48,14 @@ void dupenv(t_env **myenv, char **env)
 	if (!env[0])
 		return(addbenv(myenv, newenv(ft_strdup("PWD"), getcwd(NULL, 0), 1)),
 		 addbenv(myenv, newenv(ft_strdup("SHLVL"), ft_strdup("1"), 1)),
-		addbenv(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1)));
+		ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1)));
 	while (env[++i])
 	{
 		subenv = subbing(env[i]);
 		addbenv(myenv, newenv(subenv[0], subenv[1], 1));
 		free(subenv);
 	}
-	addbenv(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1));
+	ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1));
 }
 
 // int builting(t_env *myenv, char **arg) //!!

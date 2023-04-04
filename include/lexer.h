@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:32:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/03 02:56:10 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 02:00:15 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ t_token *ft_newtoken(e_flag type, char *word, int flag, int hdoc);
 t_token	*lasttok(t_token *lst);
 void	addtok(t_token **lst, t_token *new);
 t_token *tokenizer(char *c);
-
+void	add_down(t_token **lst, t_token *new, int f);
+int	size_token(t_token *lst);
+int	size_down(t_token *lst);
 #endif

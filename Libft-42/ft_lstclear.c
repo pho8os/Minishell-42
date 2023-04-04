@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:21:22 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/15 01:30:45 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 03:06:44 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ void delone_env(t_env **env)
     
     tmp = *env;
     if (!tmp->prev)
-        return (*env = (*env)->next, (*env)->prev = NULL, free(tmp));
+	{
+		tmp = tmp->next;
+		(*env)->next = NULL;
+		tmp->prev = NULL;
+		*env =  tmp;
+		return ;//, free(tmp));
+	}
     if (!tmp->next)
         return (*env = (*env)->prev, (*env)->next = NULL, free(tmp));
     (*env) = (*env)->next;

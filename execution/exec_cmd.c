@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/02 01:15:14 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/04 06:13:13 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 char **trans_list(t_token *list, t_env *myenv)
 {
-    int f;
-    int i;
-    char *str;
-    char **arg;
+    t_vartrans_list v;
     
-    arg = malloc(sizeof(char *) * (size_down(list) + 1));
-    if (!arg)
+    v.arg = malloc(sizeof(char *) * (size_token(list) + 1));
+    if (!v.arg)
         return (NULL);
-    f = 0;
-    i = 0;
-    str = NULL;
+    v.i = 0;
+    v.str = NULL;
     while (list)
     {
-        (!list->down || list->down->type == SPACE || list->down->type == TAB) && (f = 1);
-        (list->type == WORD) && (str = ft_strjoin(str, expand(list, myenv)));
-        if (f && str) // in case space at end
+        if (!list->down)
+            v.arg[v.i++] = change(list, myenv);
+        else
         {
-            arg[i++] = str;
-            str = NULL;
-            f = 0;
+            v.tmp = list;
+            while (v.tmp)
+            {
+                v.str = ft_strjoin(v.str, change(v.tmp, myenv));
+                v.tmp = v.tmp->down;
+            }
+            v.arg[v.i++] = v.str;
         }
-        list = list->down;
+        list = list->next;
     }
-    return (arg[i] = 0, arg);
+    return (v.arg[v.i] = 0, v.arg);
 }
 
 char *valid_path(char *arg, char *path)
@@ -103,9 +103,17 @@ void exec_cmd(t_ast **ast, t_env *myenv)
         exit(127);
     }
     waitpid(pid, &stat, 0);
-    printf("\n=== >%d\n", stat / 256);
+    exit_status(myenv, WEXITSTATUS(stat));
+    // printf("\n=== >%d\n", WEXITSTATUS(stat));
     // int i = -1;
-    // while (env[++i])
-    //     printf("arg[%d] =  %s\n",i, env[i]);
+    // while (arg[++i])
+    //     printf("arg[%d] =  %s\n",i, arg[i]);
     
+}
+void exit_status(t_env *myenv ,int status)
+{
+    t_env *find;
+
+    find = ft_lstchr(myenv, "?");
+    find->value = ft_itoa(status);
 }
