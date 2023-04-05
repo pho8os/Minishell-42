@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 07:04:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 05:44:35 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef struct s_varibles
 {
+	char *cmdl;
 	t_ast *ast;
 	t_env *myenv;
 	t_token *tok;

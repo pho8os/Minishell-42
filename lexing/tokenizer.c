@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:30:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 02:21:19 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 09:15:07 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int getflag(char c, int flag)
 		if(str[i] == c)
 			break ;
 	if (c == '&' && !flag)
-		return(puts("Unespected token '&'"), exit(1), 0);
+		return(0);
 	else if(c == '&' && flag)
 		return (9);
 	(flag) && (i += 7);
@@ -128,7 +128,7 @@ t_token *tokenizer(char *c)
 	}
 	if(sq || dq)
 		return(puts("Syntax : quote unfound"), NULL);
-	addtok(&token, ft_newtoken(END, NULL, 0, 0));
+	addtok(&token, ft_newtoken(END, ft_strdup("newline"), 0, 0));
 	return(token);
 	
 }

@@ -1,8 +1,6 @@
-- 
-- redirections
-- t_operator op 7yedha
-- handl /bin/ls
-- ac av in main
-- bedel smiat
-- exit(1) in pipe 
-- syntax error
+- update malloc
+- redirections expind herdoc
+- && ||
+- wildcars
+- signals exit status
+-

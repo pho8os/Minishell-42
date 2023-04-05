@@ -6,20 +6,19 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:15 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 06:45:03 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 05:46:44 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-t_ast	*new_oper(int type, t_ast *left, t_ast *right, char *op)
+t_ast	*new_oper(int type, t_ast *left, t_ast *right)
 {
 	t_operator	*operator;
 	
 	operator = malloc(sizeof(t_operator));
     if (!operator)
         return (NULL);
-    operator->op = op;
     operator->type = type;
     operator->left = left;
     operator->right = right;
@@ -35,6 +34,7 @@ t_ast *new_reder(void)
         return (NULL);
     redirection->type =  REDIR;
     redirection->trdr = NULL;
+    redirection->fd_in = 0;
     return ((t_ast *)redirection);   
 }
 
@@ -61,7 +61,7 @@ t_ast	*new_cmd(t_token *list)
     command->type = WORD;
     command->list = list;
     tmp =list;
-    while ((tmp)->type == WORD && (tmp)->type != END)
+    while (tmp->type == WORD && tmp->type != END)
         tmp = tmp->next;
     tmp = tmp->prev;
     tmp->next = NULL;

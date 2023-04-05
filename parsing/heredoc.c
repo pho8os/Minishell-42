@@ -6,22 +6,24 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:42:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 07:10:49 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 06:10:11 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void redir_fill(t_redir *node, int t)
-// {
-// 	node->type = t;
-// 	node->fsrc = 0;
-// 	node->fdst = 1;
-// 	node->ofalgs = O_RDONLY;
-// 	if(t == ROUT || t == APPEND)
-// 		node->ofalgs = O_CREAT | O_WRONLY | ((t == ROUT) * O_TRUNC + !(t == RIN) * O_APPEND);
-// 	(t == HEREDOC) && (node->fsrc = heredoc(join_tokens(node->file)));
-// }
+char *join_tokens(t_token *node)
+{
+	char *str;
+    
+	str = NULL;
+	while(node)
+	{
+		str = ft_strjoin(str, node->token);
+		node = node->down;
+	}
+	return(str);
+}
 
 int	heredoc(char *delim)
 {

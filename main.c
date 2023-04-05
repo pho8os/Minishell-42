@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 09:59:30 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 09:47:00 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,16 @@ void print_tree(t_ast *ast, int sp)
         print_tree(((t_redir *)ast)->trdr, sp);	
 	for (int i = 10; i < sp; i++)
         printf(" ");
-	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
-		printf("type = %d   %s\n\n", ast->type, ((t_operator * )ast)->op);
+	if (ast->type == AND)
+		printf("type = %d  && \n\n", ast->type);
+	else if (ast->type == OR )
+		printf("type = %d  || \n\n", ast->type);
+	else if (ast->type == PIPE)
+		printf("type = %d  | \n\n", ast->type);
 	else if (ast->type == PAR)
 		printf("type = %d (  )\n\n", ast->type);
 	else if (ast->type == REDIR)
-		printf("type = %d arg = %s in = %d out %d \n\n", ((t_redir *)ast)->typeredir, ((t_redir *)ast)->tok->token, ((t_redir *)ast)->fd_in , ((t_redir *)ast)->fd_out);
+		printf("type = %d arg = %s in = %d \n\n", ((t_redir *)ast)->typeredir, ((t_redir *)ast)->tok->token, ((t_redir *)ast)->fd_in);
 	else
 		print_down(((t_command *)ast)->list);
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
@@ -102,8 +106,7 @@ void print_tree(t_ast *ast, int sp)
 }
 
 int main(int ac, char **av, char **env)
-{	
-	char *cmdl;
+{
 	t_varibles v;
 	
 	(void)av;
@@ -111,21 +114,21 @@ int main(int ac, char **av, char **env)
 	dupenv(&v.myenv, env);
 	while(1)
 	{
-		cmdl = readline("minishell> ");
-		if (cmdl == NULL)
+		v.cmdl = readline("minishell> ");
+		if (v.cmdl == NULL)
 			break;
-		v.tok = tokenizer(cmdl);	
+		v.tok = tokenizer(v.cmdl);	
 		// print_tok(v.tok);
 		v.ast = parser(&v.tok);
-		print_tree(v.ast, 0);
+		// print_tree(v.ast, 0);
 		execution(&v.ast, v.myenv);
 		// puts("ss");
-		// add_history(cmdl);
+		add_history(v.cmdl);
 		// printf("== > %d\n", ((t_redr *)v.ast)->trdr->type);
 		// printf("%s", cmdl);
 		// test_builting(&v);
 		// rl_redisplay();
 		// rl_replace_line("New command", 0);
-		free(cmdl);
+		free(v.cmdl);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 02:20:06 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 10:02:13 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 07:12:38 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void execution(t_ast **ast, t_env *myenv)
         exec_pipe(ast, myenv);
     else if ((*ast)->type == REDIR)
         exec_redir(ast, myenv);
-    else
+    else if ((*ast)->type == WORD)
         exec_cmd(ast, myenv);
+    else
+        return ;    
 }
