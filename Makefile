@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/04/04 08:22:03 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/05 11:13:48 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 READLINE_PATH=$(shell brew --prefix readline)
 
-CFLAGS = -Wall -Wextra -Werror  -Iinclude -g -fsanitize=address -fsanitize=undefined
+CFLAGS = -Wall -Wextra -Werror  -Iinclude -g #-fsanitize=address -fsanitize=undefined
 
 HEDER = include/builtins.h include/executor.h include/lexer.h include/minishell.h include/parser.h include/filtrage.h
 

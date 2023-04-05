@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:17 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/05 09:40:51 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:57:39 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_ast *parse_redir(t_token **tok)
     t_ast *ast;
     t_ast *reder;
 
-    ast = parse_cmd(tok); // no need to protection
+    ast = parse_cmd(tok); // no need to protection protected in addback redir
     if ((*tok)->type == RIN || (*tok)->type == ROUT || (*tok)->type == HEREDOC || (*tok)->type == APPEND)
     {
         reder = redire_info(tok);
@@ -46,8 +46,7 @@ t_ast *parse_redir(t_token **tok)
                 return(NULL);
             else if (ast && (*tok)->type == WORD)
                 addb_list(ast, tok);
-            else if (!ast  && (*tok)->type == WORD)
-                ast = parse_cmd(tok);
+            (!ast  && (*tok)->type == WORD) && (ast = parse_cmd(tok)); // protected in addback redir
         }
         return(addback_redir(reder, ast), reder);
     }
@@ -90,7 +89,7 @@ t_ast *parse_oper(t_token **tok)
     ast = parse_pipe(tok);
     if (!ast)
         return (NULL);
-    while (*tok && ((*tok)->type == AND || (*tok)->type == OR))
+    while (((*tok)->type == AND || (*tok)->type == OR))
     {
         ast = new_oper((*tok)->type, ast, NULL);
         *tok = (*tok)->next;

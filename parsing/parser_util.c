@@ -6,20 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 00:51:54 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/05 09:44:32 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:56:01 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
-//checker_redir((*tok)->type, 1)
-int checker_redir(int type, int flag)
-{
-    int retur;
-
-    (flag && (type == RIN || type == ROUT || type == HEREDOC || type == APPEND)) && (retur = 1);
-    (!flag && type != RIN && type != ROUT && type != HEREDOC && type != APPEND) && (retur = 0);
-    return (retur);
-}
 
 int addback_redir(t_ast *tree, t_ast *addin)
 {

@@ -6,12 +6,15 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 08:21:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/05 11:09:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
+
+# define RIGHT 0
+# define LEFT 1
 
 void execution(t_ast **ast, t_env *myenv);
 void exec_pipe(t_ast **ast, t_env *myenv);
