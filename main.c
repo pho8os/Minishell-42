@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/05 09:47:00 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:54:23 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void print_tok(t_token *tok) //!!
 		
 			// printf("len = %d\n", size_down(tok));
 		tmp = tok->down;
-		printf("\n!%s! |type = %d| |exp = %d|\n", tok->token, tok->type, tok->expand);
+		printf("\n!%s! |type = %d| |hdoc = %d|\n", tok->token, tok->type, tok->hdoc);
 		while (tmp)
 		{
-			printf("** !%s! |type = %d| |exp = %d| **", tmp->token, tmp->type, tmp->expand);
+			printf("** !%s! |type = %d| |hdoc = %d| **", tmp->token, tmp->type, tmp->hdoc);
 			tmp = tmp->down;
 		}
 		puts("\n-----------");
@@ -83,7 +83,7 @@ void print_tree(t_ast *ast, int sp)
 	sp += 10;
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
 		print_tree(((t_operator * )ast)->right, sp);	
-	if (ast->type == PAR)
+	if (ast->type == SUBSHELL)
 		print_tree(((t_subsh *)ast)->sub, sp);
 	if (ast->type == REDIR)
         print_tree(((t_redir *)ast)->trdr, sp);	
@@ -95,7 +95,7 @@ void print_tree(t_ast *ast, int sp)
 		printf("type = %d  || \n\n", ast->type);
 	else if (ast->type == PIPE)
 		printf("type = %d  | \n\n", ast->type);
-	else if (ast->type == PAR)
+	else if (ast->type == SUBSHELL)
 		printf("type = %d (  )\n\n", ast->type);
 	else if (ast->type == REDIR)
 		printf("type = %d arg = %s in = %d \n\n", ((t_redir *)ast)->typeredir, ((t_redir *)ast)->tok->token, ((t_redir *)ast)->fd_in);
@@ -114,16 +114,18 @@ int main(int ac, char **av, char **env)
 	dupenv(&v.myenv, env);
 	while(1)
 	{
+		//signal()
 		v.cmdl = readline("minishell> ");
 		if (v.cmdl == NULL)
 			break;
-		v.tok = tokenizer(v.cmdl);	
+		v.tok = tokenizer(v.cmdl);
 		// print_tok(v.tok);
 		v.ast = parser(&v.tok);
+		// printf("%s\n", v.myenv->value);
 		// print_tree(v.ast, 0);
-		execution(&v.ast, v.myenv);
+		execution(v.ast, v.myenv);
 		// puts("ss");
-		add_history(v.cmdl);
+		(*v.cmdl) && (add_history(v.cmdl));
 		// printf("== > %d\n", ((t_redr *)v.ast)->trdr->type);
 		// printf("%s", cmdl);
 		// test_builting(&v);

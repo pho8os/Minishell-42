@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:17 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/05 10:57:39 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 08:26:43 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ t_ast *parse_cmd(t_token **tok)
             *tok = (*tok)->next;
         return(ast = new_cmd(tmp), ast);
     }
-    if ((*tok)->type != WORD || (*tok)->type == END) // for syntax error
-        return (NULL);
-    return(parse_oper(tok));
+    return (NULL); // for syntax error
 }
 
 t_ast *parse_redir(t_token **tok)
@@ -42,11 +40,11 @@ t_ast *parse_redir(t_token **tok)
         reder = redire_info(tok);
         while ((*tok)->type != AND && (*tok)->type != OR && (*tok)->type != PIPE && (*tok)->type != END)
         {
-            if(!addback_redir(reder, redire_info(tok)))
+            if((*tok)->type != WORD && !addback_redir(reder, redire_info(tok)))
                 return(NULL);
-            else if (ast && (*tok)->type == WORD)
-                addb_list(ast, tok);
             (!ast  && (*tok)->type == WORD) && (ast = parse_cmd(tok)); // protected in addback redir
+            if (ast && (*tok)->type == WORD)
+                addb_list(ast, tok);
         }
         return(addback_redir(reder, ast), reder);
     }
@@ -73,9 +71,8 @@ t_ast *parse_pipe(t_token **tok)
         return (NULL);
     while ((*tok)->type == PIPE)
     {
-        ast = new_oper((*tok)->type, ast, NULL);
         *tok = (*tok)->next;
-        ((t_operator *)ast)->right = parse_redir(tok);
+        ast = new_oper(PIPE, ast, parse_redir(tok));
         if (!((t_operator *)ast)->right)
             return (NULL);
     }
@@ -108,6 +105,6 @@ t_ast *parser(t_token **tok)
         return (NULL);
     tree = parse_oper(tok);
     if(!tree)
-        printf("Syntax : Error unexpected token `%s'\n", (*tok)->token);
+        printf("Syntax : Error unexpected token `%s'\n", (*tok)->token); //
     return (tree);
 }

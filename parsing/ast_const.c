@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:15 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/05 05:46:44 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:41:23 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_ast *new_sub(t_ast *tree)
     sub = malloc(sizeof(t_subsh));
     if (!sub)
         return (NULL);
-    sub->type =  PAR;
+    sub->type =  SUBSHELL;
     sub->sub = tree;
     return ((t_ast *)sub);
 }

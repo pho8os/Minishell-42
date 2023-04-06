@@ -6,12 +6,29 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:28:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 05:24:03 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:30:12 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
+void exit_status(t_env *myenv ,int status)
+{
+    t_env *find;
+    
+    // WTERMSIG(status) + 128;
+    find = ft_lstchr(myenv, "?");
+    find->value = ft_itoa(status);
+}
+
+char *change(t_token *list, t_env *myenv)
+{
+	// if(list->hdoc && ft_strchr(list->token, '$'))
+	// 	return 	(wildmatch(list->token));
+	if (list->expand)
+		return (expand(list->token, myenv));
+	return (list->token);	
+}
 
 char *getval(char *str, int *i, t_env *env)
 {
@@ -72,11 +89,4 @@ char *expand(char *str, t_env *env)
 	p = ft_substr(str , j, i - j);
 	s = ft_strjoin(s, p);
 	return (s);
-}
-
-char *change(t_token *list, t_env *myenv)
-{
-	if (list->expand)
-		return (expand(list->token, myenv));
-	return (list->token);	
 }

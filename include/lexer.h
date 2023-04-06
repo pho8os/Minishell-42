@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:32:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 02:00:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:41:23 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef enum s_flag
 	OR = 10,
 	HEREDOC = 11,
 	APPEND = 12,
-	PAR,
+	SUBSHELL,
 	REDIR,
 	END,
 }	e_flag;

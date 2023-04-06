@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 09:31:51 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 06:17:04 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,23 @@ void dupenv(t_env **myenv, char **env)
 }
 
 // int builting(t_env *myenv, char **arg) //!!
-int builting(t_env *myenv, char **arg) //!!
+int builting(t_env *myenv, char **arg, char **argzb) //!!
 {
+	(void) argzb;
     if (ft_memcmp("pwd", arg[0], 4) == 0)
         return (pwd(myenv), 1);
     else if (ft_memcmp("cd", arg[0], 3) == 0)
-        return (cd(myenv, arg), 1);
+        return (cd(myenv, argzb), 1);
     else if (ft_memcmp("env", arg[0], 4) == 0)
         return (env(myenv), 1);
     else if (ft_memcmp("export", arg[0], 7) == 0)
         return (export(myenv , arg), 1);
     else if (ft_memcmp("unset", arg[0], 6) == 0)
-        return (unset(myenv , arg), 1);
+        return (unset(myenv , argzb), 1);
     else if (ft_memcmp("exit", arg[0], 5) == 0)
-        return (ft_exit(myenv , arg), 1);
+        return (ft_exit(myenv , argzb), 1);
     else if (ft_memcmp("echo", arg[0], 5) == 0)
-        return (echo(myenv, arg), 1);
+        return (echo(myenv, argzb), 1);
 	else
 		return (0);	
 	// i = 0;

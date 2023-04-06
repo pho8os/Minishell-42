@@ -6,35 +6,52 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/05 08:22:28 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 11:09:15 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-int create_duping(t_redir *redir)
+int expand_herdoc(int fd_in, t_env *myenv)
+{
+    int fd[2];
+    char *gnl;
+    
+    if (pipe(fd) == -1)
+        return (exit(1), write(2, "pipe_expand_herdoc", 18)); //signal
+    gnl = expand(get_next_line(fd_in), myenv);
+    while (gnl)
+    {
+        write(fd[1], gnl, ft_strlen(gnl));
+        gnl = expand(get_next_line(fd_in), myenv);
+    }
+    (gnl) && (write(fd[1], gnl, ft_strlen(gnl)));
+    return(close(fd[1]), fd[0]);
+}
+
+int create_duping(t_redir *redir, t_env *myenv)
 {
     int fd;
     int std;
-    
+
     (redir->typeredir == RIN || redir->typeredir == HEREDOC) && (std = 0);
     (redir->typeredir == ROUT || redir->typeredir == APPEND) && (std = 1);
     if (redir->typeredir != HEREDOC)
     {
-        fd = open(redir->arg, redir->flags, 0664);
+        fd = open(change(redir->tok, myenv), redir->flags, 0664);
         if (fd == -1)
             return (perror("open "), exit(1) ,0);
         if (dup2 (fd, std) == -1)
             return (perror("dup2 "), exit(1) ,0);
-        close(fd);
+        return (close(fd), 1);
     }
-    else
-        if (dup2 (redir->fd_in, std) == -1)
-            return (perror("dup2 "), exit(1) ,0);
-    return (1);        
+    (redir->tok->hdoc && !redir->tok->down) && (redir->fd_in = expand_herdoc(redir->fd_in, myenv));
+    if (dup2 (redir->fd_in, std) == -1)
+        return (perror("dup2 "), exit(1) ,0);
+    return(1);        
 }
 
-void exec_redir(t_ast **ast, t_env *myenv)
+void exec_redir(t_ast *ast, t_env *myenv)
 {
     int pid;
     int status;
@@ -44,8 +61,8 @@ void exec_redir(t_ast **ast, t_env *myenv)
         return ;
     if (!pid)
     {
-        while (*ast && (*ast)->type == REDIR && create_duping((t_redir *)*ast))
-            (*ast) = ((t_redir *)*ast)->trdr;
+        while (ast && ast->type == REDIR && create_duping((t_redir *)ast, myenv))
+            ast = ((t_redir *)ast)->trdr;
         execution(ast, myenv);
         exit(0);
     }

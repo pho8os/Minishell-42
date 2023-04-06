@@ -6,11 +6,31 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/05 08:25:40 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:59:18 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
+
+char **trans_myenv(t_env *myenv)
+{
+    int i;
+    int len;
+    char **env;
+    
+    i = 0;
+    len = ft_lstsize(myenv);
+    env = malloc(sizeof(char *) * (len + 1));
+    if (!env)
+        return (NULL);
+    env[len] = 0;
+    while (myenv)
+    {
+        (myenv->print) && (env[i++] = ft_strjoin_sp(myenv->variable, myenv->value, '='));
+        myenv = myenv->next;
+    }
+    return (env);
+}
 
 char **trans_list(t_token *list, t_env *myenv)
 {
@@ -40,6 +60,16 @@ char **trans_list(t_token *list, t_env *myenv)
     return (v.arg[v.i] = 0, v.arg);
 }
 
+char **test_dzb(char **arg) // !!!
+{
+    int i = -1;
+    char *str = NULL;
+    
+    while(arg[++i])
+        str = ft_strjoin_sp(str, arg[i], ' ');
+    return (ft_split(str, ' '));    
+}
+
 char *valid_path(char *arg, char *path)
 {
     int i;
@@ -59,38 +89,21 @@ char *valid_path(char *arg, char *path)
     return (paths[0]);
 }
 
-char **trans_myenv(t_env *myenv)
-{
-    int i;
-    int len;
-    char **env;
-    
-    i = 0;
-    len = ft_lstsize(myenv);
-    env = malloc(sizeof(char *) * (len + 1));
-    if (!env)
-        return (NULL);
-    env[len] = 0;
-    while (myenv)
-    {
-        (myenv->print) && (env[i++] = ft_strjoin_sp(myenv->variable, myenv->value, '='));
-        myenv = myenv->next;
-    }
-    return (env);
-}
-
-void exec_cmd(t_ast **ast, t_env *myenv)
+void exec_cmd(t_ast *ast, t_env *myenv)
 {
     char **arg;
+    char **argzb;
     pid_t pid;
     t_env *tmp;
     int stat;
+    // char **env = trans_myenv(myenv);
 
-    arg = trans_list(((t_command *)*ast)->list, myenv);
+    arg = trans_list(((t_command *)ast)->list, myenv);
+    argzb = test_dzb(arg);
     // int i = -1;
-    // while (arg[++i])
-    //     printf("arg[%d] =  %s\n",i, arg[i]);
-    if (builting(myenv, arg))
+    // while (env[++i])
+    //     printf("env[%d] =  %s\n",i, env[i]);
+    if (builting(myenv, arg, argzb))
         return ;
     tmp = ft_lstchr(myenv, "PATH");
     if (!tmp)
@@ -100,20 +113,12 @@ void exec_cmd(t_ast **ast, t_env *myenv)
         return ;
     if (!pid)
     {
-        execve(valid_path(arg[0], tmp->value), arg, trans_myenv(myenv));
-        perror(arg[0]); //!!!!
+        execve(valid_path(argzb[0], tmp->value), argzb, trans_myenv(myenv));
+        perror(argzb[0]); //!!!!
         exit(127);
     }
     waitpid(pid, &stat, WUNTRACED);
-    exit_status(myenv, stat);
+    exit_status(myenv, WEXITSTATUS(stat));
     // printf("\n=== >%d\n", WEXITSTATUS(stat));
     
-}
-void exit_status(t_env *myenv ,int status)
-{
-    t_env *find;
-    
-    // WTERMSIG(status) + 128;
-    find = ft_lstchr(myenv, "?");
-    find->value = ft_itoa(status);
 }

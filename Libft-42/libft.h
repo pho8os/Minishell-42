@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 05:56:48 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 07:44:01 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <string.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 typedef struct s_env
 {
 	char			*variable;
@@ -44,11 +48,13 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strstr(char *str, char *to_find);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(const char *s, int fd);
 void	ft_putstr_fd(const char *s, int fd);
+char	*get_next_line(int fd);
 t_env	*newenv(char *variable, char *value, int prenv);
 void	ft_lstadd_front(t_env **lst, t_env *new);
 void	addbenv(t_env **lst, t_env *new);

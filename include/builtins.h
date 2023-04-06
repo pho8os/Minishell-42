@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:04:19 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 06:54:49 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 06:01:45 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void	dupenv(t_env **myenv, char **env);
 char	**subbing(char *env);
-int	    builting(t_env *myenv, char **arg);
+// int	    builting(t_env *myenv, char **arg);
+int	    builting(t_env *myenv, char **arg, char **argzb);
 
 void	env(t_env *myenv);
 void	pwd(t_env *myenv);

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/05 05:44:35 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/06 07:01:48 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../Libft-42/libft.h"
+#include <dirent.h>
 # include <stdbool.h>
 # include <limits.h>
 # include <fcntl.h>

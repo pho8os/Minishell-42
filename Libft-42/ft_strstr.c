@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 13:23:10 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/06 08:39:06 by yettabaa         ###   ########.fr       */
+/*   Created: 2022/06/19 08:23:11 by absaid            #+#    #+#             */
+/*   Updated: 2023/04/06 06:20:52 by absaid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strstr(char *str, char *to_find)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	if (!s)
-		return (NULL);
-	while (*(s + (++i)))
-		if (*(s + i) == (unsigned char)c)
-			return ((char *)s + i);
-	if (*(s + i) == (unsigned char)c)
-		return ((char *)s + i);
-	return (NULL);
+	if (to_find[0] == '\0')
+		return (str);
+	while (str[++i])
+	{
+		j = 0;
+		while (str[i + j] == to_find[j])
+		{
+			if (to_find[j + 1] == '\0')
+				return (str + i);
+			j++;
+		}
+	}
+	return (0);
 }

@@ -1,6 +1,13 @@
-- update malloc
-- redirections expind herdoc
-- && ||
-- wildcars
 - signals exit status
--
+- update malloc
+- wildcars
+- handl msg errors
+- Makefile
+- expind in redrections
+- getwc in wildcar
+- empty command hystory
+
+
+SIGQUIT ctr + \
+SIGINT Ctr + C
+SIGKILL Ctr + D
