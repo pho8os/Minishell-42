@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 11:09:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 12:04:11 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int create_duping(t_redir *redir, t_env *myenv)
 void exec_redir(t_ast *ast, t_env *myenv)
 {
     int pid;
-    int status;
+    int statu;
 
     pid = fork();
     if (pid == -1)
@@ -66,8 +66,6 @@ void exec_redir(t_ast *ast, t_env *myenv)
         execution(ast, myenv);
         exit(0);
     }
-    waitpid(pid, &status, 0);
-    while (wait(NULL) != -1)
-        ;
-    exit_status(myenv, WEXITSTATUS(status));
+    waitpid(pid, &statu, 0);
+    exit_status(myenv, WEXITSTATUS(statu));
 }

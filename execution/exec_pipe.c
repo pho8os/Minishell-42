@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:40:58 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 01:11:55 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 12:05:12 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int pipe_root(t_ast *ast, t_env *myenv, int fd[2], int std)
         close(fd[0]);  
         close(fd[1]);
         execution(ast, myenv);
-        exit(0); 
+        exit(ft_atoi(myenv->value));
     }
     return(1);
 }
@@ -34,6 +34,7 @@ int pipe_root(t_ast *ast, t_env *myenv, int fd[2], int std)
 void exec_pipe(t_ast *ast, t_env *myenv)
 {
     int fd[2];
+    int statu;
     
     if (pipe(fd) == -1)
         return (perror("Pipe filed"));   
@@ -41,8 +42,8 @@ void exec_pipe(t_ast *ast, t_env *myenv)
         return ;
     close(fd[0]);
     close(fd[1]);
-    wait(NULL);
-    wait(NULL);
-    // while (wait(NULL) != -1)
-    //     ;
+    wait(&statu);
+    exit_status(myenv, WEXITSTATUS(statu));
+    wait(&statu);
+    exit_status(myenv, WEXITSTATUS(statu));
 }

@@ -4,10 +4,11 @@
 - handl msg errors
 - Makefile
 - expind in redrections
-- getwc in wildcar
 - empty command hystory
-
+- exit builtins
 
 SIGQUIT ctr + \
 SIGINT Ctr + C
 SIGKILL Ctr + D
+echo $HOME$HOME
+echo $HOME_$HOME

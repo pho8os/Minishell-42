@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/04/06 07:16:51 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/07 11:59:42 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,11 @@ READLINE_PATH=$(shell brew --prefix readline)
 
 CFLAGS = -Wall -Wextra -Werror  -Iinclude -g -fsanitize=address -fsanitize=undefined
 
-HEDER = include/builtins.h include/executor.h include/lexer.h include/minishell.h include/parser.h include/filtrage.h
+HEDER = ./include/builtins.h ./include/execution.h ./include/lexer.h ./include/minishell.h ./include/parser.h ./Libft-42/libft.h
 
 SRCS = main.c \
 lexing/lexer_utils.c lexing/tokenizer.c \
-parsing/ast_const.c parsing/parser.c parsing/parser_util.c parsing/heredoc.c \
+parsing/ast_const.c parsing/parser.c parsing/utils.c parsing/heredoc.c parsing/parser_priorities.c\
 builtins/builtins.c builtins/pwd.c builtins/export.c builtins/echo.c builtins/cd.c builtins/utils.c builtins/unset.c builtins/env.c builtins/exit.c \
 execution/execution.c execution/exec_pipe.c execution/exec_cmd.c execution/expand.c execution/exec_redir.c execution/exec_oper_subshell.c execution/wildcrads.c
 #lexing/lexer.c lexing/lexer_lst.c lexing/lexer_utils.c\

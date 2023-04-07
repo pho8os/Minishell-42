@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:30:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/05 09:15:07 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 08:41:06 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_token *tokenizer(char *c)
 	bool sq = false;
 	bool space = true;
 	int x;
+	int op = 0;
+	int cp = 0;
 	
 	while(c[++i])
 	{
@@ -100,6 +102,8 @@ t_token *tokenizer(char *c)
 			(c[i] == '\"') && (dq = !dq);
 			(ft_strchr("|<>&", c[i]) && c[i] == c[i + 1]) && (x = 1);
 			(c[i] != '\'' && c[i] != '\"') && (space = true);
+			(c[i] == '(') && (op += 1);
+			(c[i] == ')') && (cp += 1);
 			if(!allspace(i, c) && c[i] != '\'' && c[i] != '\"' && c[i] != ' ' && c[i] != '\t')
 				addtok(&token, ft_newtoken(getflag(c[i], x), ft_substr(c, i, x + 1), 0, 0));
 			if(c[i] == ' ' || c[i] == '\t')
@@ -126,8 +130,8 @@ t_token *tokenizer(char *c)
 			}
 		}
 	}
-	if(sq || dq)
-		return(puts("Syntax : quote unfound"), NULL);
+	if((sq || dq) || (op != cp))
+		return(puts("Syntax : Quote or parantes"), NULL);
 	addtok(&token, ft_newtoken(END, ft_strdup("newline"), 0, 0));
 	return(token);
 	

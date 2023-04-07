@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 05:42:25 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 10:01:34 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,16 @@ void print_export(t_env *myenv)
         exp = exp->next;
     }
 }
+int is_digit(char *str)
+{
+    int i;
 
+    i = -1;
+    while (str[++i])
+        if (!ft_isdigit(str[i]))
+            return (0);
+    return(1);
+}
 void builtins_error(const char *cmd, const char *arg, const char *msg)
 {
     ft_putstr_fd ("bash : ", STDERR_FILENO);

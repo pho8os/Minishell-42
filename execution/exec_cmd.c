@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 09:59:18 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 04:32:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void exec_cmd(t_ast *ast, t_env *myenv)
         return ;
     if (!pid)
     {
+        signal(SIGQUIT, SIG_DFL);
+        signal(SIGINT, SIG_DFL);
         execve(valid_path(argzb[0], tmp->value), argzb, trans_myenv(myenv));
         perror(argzb[0]); //!!!!
         exit(127);

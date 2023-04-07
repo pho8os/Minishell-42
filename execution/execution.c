@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 02:20:06 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 03:37:36 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:00:02 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void execution(t_ast *ast, t_env *myenv)
 {
     if (!ast)
-        return;
+        return ;
     if (ast->type == PIPE)
         exec_pipe(ast, myenv);
     else if (ast->type == AND || ast->type == OR)

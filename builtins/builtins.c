@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 06:17:04 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 10:34:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void dupenv(t_env **myenv, char **env)
 	if (!env[0])
 		return(addbenv(myenv, newenv(ft_strdup("PWD"), getcwd(NULL, 0), 1)),
 		addbenv(myenv, newenv(ft_strdup("SHLVL"), ft_strdup("1"), 1)),
-		ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1)));
+		ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -2)));
 	while (env[++i])
 	{
 		subenv = subbing(env[i]);
 		addbenv(myenv, newenv(subenv[0], subenv[1], 1));
 		free(subenv);
 	}
-	ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -1));
+	ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -2));
 }
 
 // int builting(t_env *myenv, char **arg) //!!
@@ -75,7 +75,7 @@ int builting(t_env *myenv, char **arg, char **argzb) //!!
     else if (ft_memcmp("exit", arg[0], 5) == 0)
         return (ft_exit(myenv , argzb), 1);
     else if (ft_memcmp("echo", arg[0], 5) == 0)
-        return (echo(myenv, argzb), 1);
+        return (echo(myenv, arg), 1);
 	else
 		return (0);	
 	// i = 0;

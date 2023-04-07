@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 00:51:54 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/05 10:56:01 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 01:53:30 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int addback_redir(t_ast *tree, t_ast *addin)
 {
-    if (!addin)
+    if (!addin || !tree)
         return(0) ;
 	while (((t_redir *)tree)->trdr)
 		tree = ((t_redir *)tree)->trdr;

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/06 09:54:23 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:40:08 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,33 +104,36 @@ void print_tree(t_ast *ast, int sp)
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
 		print_tree(((t_operator * )ast)->left, sp);
 }
-
+void param_sig(int signum)
+{
+	(void)signum;
+	rl_on_new_line();
+	write(1, "\n", 1);
+    rl_replace_line("", 0);
+    rl_redisplay();
+}
 int main(int ac, char **av, char **env)
 {
 	t_varibles v;
-	
 	(void)av;
 	(void)ac;
+	signal(SIGQUIT, SIG_IGN);
 	dupenv(&v.myenv, env);
+	signal(SIGINT, param_sig);
+	rl_catch_signals = 0; // 
 	while(1)
 	{
-		//signal()
-		v.cmdl = readline("minishell> ");
+		v.cmdl = readline("minishell-$ ");
 		if (v.cmdl == NULL)
 			break;
 		v.tok = tokenizer(v.cmdl);
 		// print_tok(v.tok);
-		v.ast = parser(&v.tok);
-		// printf("%s\n", v.myenv->value);
+		v.ast = parser(&v.tok, v.myenv);
 		// print_tree(v.ast, 0);
 		execution(v.ast, v.myenv);
-		// puts("ss");
-		(*v.cmdl) && (add_history(v.cmdl));
-		// printf("== > %d\n", ((t_redr *)v.ast)->trdr->type);
-		// printf("%s", cmdl);
-		// test_builting(&v);
-		// rl_redisplay();
-		// rl_replace_line("New command", 0);
+		if (*v.cmdl)
+			add_history(v.cmdl);
 		free(v.cmdl);
 	}
+	exit(ft_atoi(v.myenv->value));	
 }

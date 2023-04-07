@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/06 07:44:01 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 07:53:57 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_strlen(const char *str);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 char	*ft_itoa(int n);
 char	*ft_strjoin(const char *s1, const char *s2);
-char	*ft_strjoin_c(const char *s1, const char *s2);
+char	*_strjoin(const char *s1, const char *s2);
 char	*ft_strjoin_sp(char const *s1, char const *s2, char c);
 char	*ft_strchr(const char *s, int c);
 void	*ft_memchr(const void *s, int c, size_t n);

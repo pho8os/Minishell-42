@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 10:58:55 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 10:45:07 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void addvalue(t_env *myenv, char **sub, int prenv, int flag)
     oldval = find->value;
     if (!flag)
         return(find->value = sub[1], free(NULL));
-    printf("%s   %s \n", oldval, sub[1])  ;
     return(find->value = ft_strjoin(oldval, sub[1]), free(NULL));
 }
 

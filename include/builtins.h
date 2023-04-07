@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:04:19 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 06:01:45 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 10:01:45 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_exit(t_env *myenv, char **arg);
 void	echo(t_env *myenv, char **arg);
 
 //utils
+int is_digit(char *str);
 void	print_export(t_env *myenv);
 void	builtins_error(const char *cmd, const char *arg, const char *msg);
 void	free_tab(char **str);

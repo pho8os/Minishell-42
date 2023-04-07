@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 00:30:36 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/04 06:43:26 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/07 07:54:08 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,29 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (str);
 }
 
-char	*ft_strjoin_c(const char *s1, const char *s2)
+char	*_strjoin(const char *s1, const char *s2)
 {
-	char *str;
-	int i;
+	int		j;
+	char	*str;
+	int		i;
 
+	i = -1;
+	if(!s1 && !s2)
+		return(ft_strdup(""));
 	if (!s1)
-		return(ft_substr(s2, 0, 1));
+		return (ft_strdup(s2));
 	if (!s2)
-		return (NULL);
-	str = malloc(ft_strlen(s1) + 2);
+		return (ft_strdup(s1));
+	str = malloc(sizeof (char) * ((ft_strlen(s1)) + ft_strlen(s2)) + 1);
 	if (!str)
 		return (NULL);
-	i = -1;
 	while (s1[++i])
 		str[i] = s1[i];
-	str[i++] = s2[0];
-	str[i] = '\0';
+	j = i;
+	i = -1;
+	while (s2[++i])
+		str[j++] = s2[i];
+	str[j] = '\0';
 	return (str);
 }
+
