@@ -1,18 +1,10 @@
-- signals exit status 
-- herdoc get_next_line
 - update malloc
 - wildcars
-- handl msg errors
 - Makefile
 - expind in redrections
-- empty command hystory
 - exit builtins
- - unset PWD OLDPWD 
- - ctrl + c double prompt
- -expund redir
+- unset PWD OLDPWD 
+- ctrl + c double prompt
+- expund redir
 
-SIGQUIT ctr + \
-SIGINT Ctr + C
-SIGKILL Ctr + D
-echo $HOME$HOME
-echo $HOME_$HOME
+

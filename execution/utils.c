@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 01:27:00 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 11:11:52 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 11:34:16 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void expand_change(t_token **list, t_env *myenv)
 		if (tmp2->next && tmp2->next->expand && ft_strchr(tmp2->next->token, '$'))
 		{
 			tmp2->next = expand(tmp2->next->token, myenv);
+			(tmp->hdoc) && (tmp2->next->hdoc = 1); // expinding with wildcard
 			lasttok(tmp2->next)->next = tmp->next;
 		}
 		else
