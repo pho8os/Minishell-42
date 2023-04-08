@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 08:10:25 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:37:54 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void print_tok(t_token *tok) //!!
 		
 			// printf("len = %d\n", size_down(tok));
 		tmp = tok->down;
-		printf("\n!%s! |type = %d| |hdoc = %d|\n", tok->token, tok->type, tok->hdoc);
+		printf("\n!%s! |type = %d| |expand = %d|\n", tok->token, tok->type, tok->expand);
 		while (tmp)
 		{
-			printf("** !%s! |type = %d| |hdoc = %d| **", tmp->token, tmp->type, tmp->hdoc);
+			printf("** !%s! |type = %d| |expand = %d| **", tmp->token, tmp->type, tmp->expand);
 			tmp = tmp->down;
 		}
 		puts("\n-----------");

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 07:19:28 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 09:58:24 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int expand_herdoc(int fd_in, t_env *myenv)
     
     if (pipe(fd) == -1)
         return (exit(1), write(2, "pipe_expand_herdoc", 18)); //signal
-    gnl = expand(get_next_line(fd_in), myenv);
+    gnl = expand_prime(get_next_line(fd_in), myenv);
     while (gnl)
     {
         write(fd[1], gnl, ft_strlen(gnl));
-        gnl = expand(get_next_line(fd_in), myenv);
+        gnl = expand_prime(get_next_line(fd_in), myenv);
     }
     (gnl) && (write(fd[1], gnl, ft_strlen(gnl)));
     return(close(fd[1]), fd[0]);

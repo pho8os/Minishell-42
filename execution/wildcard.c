@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:22:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 08:17:22 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 08:55:15 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ t_token *wildmatch(char *pattern)
 			addtok(&lst, ft_newtoken(0, ft_strdup(obj->d_name), 0, 0));
 		obj = readdir(dir);
 	}
+	if(!lst)
+		addtok(&lst, ft_newtoken(0, pattern, 0, 0));
 	return(lst);
 }

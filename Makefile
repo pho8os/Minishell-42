@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/04/08 08:05:06 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/08 09:59:05 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ lexing/lexer_utils.c lexing/tokenizer.c \
 parsing/ast_const.c parsing/parser.c parsing/utils.c parsing/heredoc.c parsing/parser_priorities.c \
 builtins/builtins.c builtins/pwd.c builtins/export.c builtins/echo.c builtins/cd.c builtins/utils.c builtins/unset.c builtins/env.c builtins/exit.c \
 execution/execution.c execution/exec_pipe.c execution/exec_cmd.c execution/expand.c execution/exec_redir.c \
-execution/exec_oper_subshell.c execution/wildcrads.c execution/signal_exitstatus.c execution/utils.c
+execution/exec_oper_subshell.c execution/wildcard.c execution/signal_exitstatus.c execution/utils.c
 
 OBJS=$(SRCS:.c=.o)
 

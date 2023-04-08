@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 01:27:00 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 05:32:53 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 11:11:52 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,60 @@ void	close_pipe(int fds[2])
 	close(fds[1]);
 }
 
-// int len_tab(char **s)
-// {
-//     int i;
-    
-//     i = 0;
-//     while (s[i])
-//         i++;
-//     return(i);
-// }
+void wildcard_change(t_token **list)
+{
+	t_token *tmp;
+	t_token *tmp2;
 
-// char **join_tab(char **s1, char **s2, int i)
-// {
-//     int i;
-//     int j;
-// 	char **strs;
+	tmp = (*list)->next;
+	if (*list && (*list)->hdoc && ft_strchr((*list)->token, '*'))
+	{
+		(*list) = wildmatch((*list)->token);
+		while ((*list)->next)
+				(*list) = (*list)->next;
+		(*list)->next = tmp;
+		return ;
+	}
+	tmp2 = *list;
+	while (tmp2)
+	{
+		tmp = tmp2->next;
+		if (tmp2->next && tmp2->next->hdoc && ft_strchr(tmp2->next->token, '*'))
+		{
+			tmp2->next = wildmatch(tmp2->next->token);
+			lasttok(tmp2->next)->next = tmp->next;
+		}
+		else
+			tmp2 = tmp2->next;
+	}
+}
 
-//     i = -1;
-//     strs = malloc(sizeof(char *) + (i + len_tab(s2) + 1));
-//     if (!strs)
-//         return (NULL);
-//     while (strs[++i])
-//         strs[i] = s1[i];
-//     j = 0;
-//     while (strs[i])
-//         strs[i++] = s2[j++];
-//     strs[i] = 0;
-//     return(strs);
-// }
+void expand_change(t_token **list, t_env *myenv)
+{
+	t_token *tmp;
+	t_token *tmp2;
+
+	tmp = (*list)->next;
+	if ((*list) && (*list)->expand && ft_strchr((*list)->token, '$'))
+	{
+		(*list) = expand(((*list))->token, myenv);
+		while ((*list)->next)
+				(*list) = (*list)->next;
+		(*list)->next = tmp;
+		return ;
+	}
+	tmp2 = *list;
+	while (tmp2)
+	{
+		tmp = tmp2->next;
+		if (tmp2->next && tmp2->next->expand && ft_strchr(tmp2->next->token, '$'))
+		{
+			tmp2->next = expand(tmp2->next->token, myenv);
+			lasttok(tmp2->next)->next = tmp->next;
+		}
+		else
+			tmp2 = tmp2->next;
+	}
+}
+
+

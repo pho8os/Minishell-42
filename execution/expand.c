@@ -6,59 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:28:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 08:24:51 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:33:44 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
-
-
-void change(t_token **list, t_env *myenv)
-{
-	t_token *tmp;
-	t_token *tmp2;
-	(void)myenv;
-	
-	tmp = *list;
-	if (*list && (*list)->hdoc && ft_strchr((*list)->token, '*'))
-	{
-		*list = wildmatch((*list)->token);
-		lasttok(*list)->next = tmp->next;
-		return ;
-	}
-	while (*list)
-	{
-		tmp2 = *list;
-		if ((*list)->next && (*list)->next->hdoc && ft_strchr((*list)->next->token, '*'))
-		{
-			(*list)->next = wildmatch((*list)->next->token);
-			while (*list)
-			{
-				*list = (*list)->next;
-				
-			}
-			
-			// (*list)->next = tmp;
-			// tmp2 = tmp2->next;
-			printf("apah %s\n", (*list)->token);
-			// printf("tzz %s\n", lasttok(tmp)->token);
-			// lasttok(tmp)->next = *list;
-		}
-		else
-			*list = (*list)->next;
-	}
-	
-}
-// char *change(t_token *list, t_env *myenv)
-// {
-// 	if(list->hdoc && ft_strchr(list->token, '$'))
-// 		(wildmatch(list->token));
-// 	if (list->expand)
-// 		return (expand(list->token, myenv));
-// 	return (list->token);
-// }
-
 
 char *getv(char *str, t_env *env)
 {
@@ -71,7 +23,7 @@ char *getv(char *str, t_env *env)
 	return(NULL);
 }
 
-char *expand(char *str, t_env *env)
+char *expand_prime(char *str, t_env *env)
 {
 
 	int i = 0;
@@ -121,17 +73,19 @@ char *expand(char *str, t_env *env)
 	return(s);
 }
 
-// t_token *expand(char *str, t_token *env)
-// {
-// 	t_token *expand;
-// 	char **str;
-// 	int i;
+t_token *expand(char *str, t_env *env)
+{
+	int i;
+	t_token *head;
+	char **strs;
 
-// 	i = 0;
-// 	str = ft_split(expand_prime(str, env), ' ');
-// 	while (str[i])
-// 	{
-		
-// 	}
-	
-// }
+	i = -1;
+	head = NULL;
+	strs = ft_split(expand_prime(str, env), ' ');
+		// printf("%s\n", strs[i]);
+	while (strs[++i])
+	{
+		addtok(&head, ft_newtoken(WORD, strs[i], 0, 0));
+	}
+	return(head);
+}

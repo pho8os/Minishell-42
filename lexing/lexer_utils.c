@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 04:27:20 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 02:18:32 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:50:54 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ t_token *ft_newtoken(e_flag type, char *word, int flag, int hdoc)
 
 t_token	*lasttok(t_token *lst)
 {
-	if(!lst)
-		return NULL;
-	while (lst->next)
+	// if(!lst)
+	// 	return NULL;
+	// while (lst->next)
+	// 	lst = lst->next;
+	// return (lst);
+	while (lst)
+	{
+		if (lst->next == NULL)
+			break ;
 		lst = lst->next;
+	}
 	return (lst);
 }
 

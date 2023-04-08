@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 08:19:30 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 11:14:29 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,9 @@ char **trans_myenv(t_env *myenv)
 char **trans_list(t_token *list, t_env *myenv)
 {
     t_vartrans_list v;
-    (void)myenv;
-    change(&list, myenv);
-    // while ((list))
-	// {
-	// 	printf("%s\n", (list)->token);
-	// 	(list) = (list)->next;
-	// }
-    return (NULL);
+
+    expand_change(&list, myenv);
+    wildcard_change(&list);
     v.arg = malloc(sizeof(char *) * (size_token(list) + 1));
     if (!v.arg)
         return (NULL);
@@ -56,7 +51,7 @@ char **trans_list(t_token *list, t_env *myenv)
             v.tmp = list;
             while (v.tmp)
             {
-                v.str = ft_strjoin(v.str, list->token);
+                v.str = ft_strjoin(v.str, v.tmp->token);
                 v.tmp = v.tmp->down;
             }
             v.arg[v.i++] = v.str;
@@ -99,36 +94,33 @@ char *valid_path(char *arg, char *path)
 void exec_cmd(t_ast *ast, t_env *myenv)
 {
     char **arg;
-    char **argzb;
-    // pid_t pid;
-    // t_env *tmp;
-    // int stat;
+    pid_t pid;
+    t_env *tmp;
+    int stat;
     // char **env = trans_myenv(myenv);
 
     arg = trans_list(((t_command *)ast)->list, myenv);
-    argzb = test_dzb(arg);
-    int i = -1;
-    while (arg[++i])
-        printf("arg[%d] =  %s\n",i, arg[i]);
-    // if (builting(myenv, arg, arg))
-    //     return ;
-    // tmp = ft_lstchr(myenv, "PATH");
-    // if (!tmp)
-    //     return (ft_putendl_fd("error", 2));
-    // pid = fork();
-    // if  (pid == -1)
-    //     return ;
-    // if (!pid)
-    // {
-    //     signal(SIGQUIT, SIG_DFL);
-    //     signal(SIGINT, SIG_DFL);
-    //     execve(valid_path(arg[0], tmp->value), arg, trans_myenv(myenv));
-    //     // perror(arg[0]); //!!!!
-    //     fd_printf(2, "Exec : command not found: %s\n", arg[0]);
-    //     exit(127);
-    // }
-    // waitpid(pid, &stat, WUNTRACED);
-    // exit_status(myenv, WEXITSTATUS(stat));
+    // int i = -1;
+    // while (arg[++i])
+    //     printf("arg[%d] =  %s\n",i, arg[i]);
+    if (builting(myenv, arg, arg))
+        return ;
+    tmp = ft_lstchr(myenv, "PATH");
+    if (!tmp)
+        return (ft_putendl_fd("error", 2));
+    pid = fork();
+    if  (pid == -1)
+        return ;
+    if (!pid)
+    {
+        signal(SIGQUIT, SIG_DFL);
+        signal(SIGINT, SIG_DFL);
+        execve(valid_path(arg[0], tmp->value), arg, trans_myenv(myenv));
+        fd_printf(2, "Exec : command not found: %s\n", arg[0]);
+        exit(127);
+    }
+    waitpid(pid, &stat, WUNTRACED);
+    exit_status(myenv, WEXITSTATUS(stat));
     // printf("\n=== >%d\n", WEXITSTATUS(stat));
     
 }
