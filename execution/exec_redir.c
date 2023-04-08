@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/07 12:04:11 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 07:19:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int create_duping(t_redir *redir, t_env *myenv)
     (redir->typeredir == ROUT || redir->typeredir == APPEND) && (std = 1);
     if (redir->typeredir != HEREDOC)
     {
-        fd = open(change(redir->tok, myenv), redir->flags, 0664);
+        fd = open(redir->tok->token, redir->flags, 0664);
         if (fd == -1)
-            return (perror("open "), exit(1) ,0);
+            return (perror(redir->tok->token), exit(1) ,0);
         if (dup2 (fd, std) == -1)
             return (perror("dup2 "), exit(1) ,0);
         return (close(fd), 1);
     }
     (redir->tok->hdoc && !redir->tok->down) && (redir->fd_in = expand_herdoc(redir->fd_in, myenv));
     if (dup2 (redir->fd_in, std) == -1)
-        return (perror("dup2 "), exit(1) ,0);
+        return (perror("dup2"), exit(1) ,0);
     return(1);        
 }
 

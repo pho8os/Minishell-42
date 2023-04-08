@@ -6,36 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:22:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/07 07:57:10 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 08:17:22 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
-t_wild *wildnew(char *ptr)
-{
-	t_wild *g;
-	
-	g = malloc(sizeof(t_wild));
-	if(!g)
-		return(NULL); 
-	return(g->match = ptr , g->next = NULL, g);
-}
-
-void addwild(t_wild **lst, t_wild *new)
-{
-	t_wild	*tmp;
-
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	tmp = *lst;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-}
 
 bool match_3(char *obj, char *pattern)
 {
@@ -88,27 +63,19 @@ bool match(char *obj, char *pattern)
 	return (match_2(obj + len, pattern + len));
 }
 
-char *wildmatch(char *pattern)
+t_token *wildmatch(char *pattern)
 {
 	DIR	*dir;
 	struct dirent *obj;
-	t_wild *lst = NULL;
+	t_token *lst = NULL;
 
 	dir = opendir(".");
 	obj = readdir(dir);
 	while(obj)
 	{
-		if(match(obj->d_name, pattern))
-			addwild(&lst, wildnew(ft_strdup(obj->d_name)));
+		if(match(obj->d_name, pattern) && obj->d_name[0] != '.')
+			addtok(&lst, ft_newtoken(0, ft_strdup(obj->d_name), 0, 0));
 		obj = readdir(dir);
 	}
-	char *str;
-	str = NULL;
-	while (lst)
-	{
-		str = ft_strjoin_sp(str, lst->match, ' ');
-		lst = lst->next;
-	}
-	
-	return(str);
+	return(lst);
 }

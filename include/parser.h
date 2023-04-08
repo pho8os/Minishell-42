@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:35:04 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/07 09:01:52 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 05:33:58 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ int		addback_redir(t_ast *tree, t_ast *addin);
 void		addb_list(t_ast *ast, t_token **tok);
 int			heredoc(char *delim);
 char		*join_tokens(t_token *node);
+void	close_pipe(int fds[2]);
 #endif

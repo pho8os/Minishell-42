@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/07 07:53:57 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 06:26:52 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <string.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10000
 # endif
 typedef struct s_env
 {
@@ -53,6 +53,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(const char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(const char *s, int fd);
 char	*get_next_line(int fd);
 t_env	*newenv(char *variable, char *value, int prenv);
@@ -63,5 +64,6 @@ t_env	*ft_lstlast(t_env *lst);
 void	ft_lstclear(t_env **lst);
 void delone_env(t_env **env);
 t_env *ft_lstchr(t_env *lst, const char *variable);
+void fd_printf(int fd, const char *fmt, ...);
 
 #endif

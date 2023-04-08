@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 02:20:06 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/07 11:00:02 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 04:52:26 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void execution(t_ast *ast, t_env *myenv)
 {
+    signal(SIGINT, SIG_IGN);
     if (!ast)
         return ;
     if (ast->type == PIPE)

@@ -6,33 +6,13 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/07 11:40:08 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 08:10:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-// void print_tok(t_token *tok) //!!
-// {
-// 	t_token *tmp;
 
-// 	while (tok)
-// 	{
-		
-// 			// printf("len = %d\n", size_down(tok));
-// 		tmp = tok->down;
-// 		printf("\n!%s! |type = %d| |exp = %d|\n", tok->token, tok->type, tok->change);
-// 		while (tmp)
-// 		{
-// 			printf("** !%s! |type = %d| |exp = %d| **", tmp->token, tmp->type, tmp->change);
-// 			tmp = tmp->down;
-// 		}
-// 		puts("\n-----------");
-// 		tok = tok->next;
-// 	}
-// 		// puts("\n-----------");
-	
-// }
 void print_tok(t_token *tok) //!!
 {
 	t_token *tmp;
@@ -104,14 +84,7 @@ void print_tree(t_ast *ast, int sp)
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
 		print_tree(((t_operator * )ast)->left, sp);
 }
-void param_sig(int signum)
-{
-	(void)signum;
-	rl_on_new_line();
-	write(1, "\n", 1);
-    rl_replace_line("", 0);
-    rl_redisplay();
-}
+
 int main(int ac, char **av, char **env)
 {
 	t_varibles v;
@@ -119,10 +92,10 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	signal(SIGQUIT, SIG_IGN);
 	dupenv(&v.myenv, env);
-	signal(SIGINT, param_sig);
 	rl_catch_signals = 0; // 
 	while(1)
 	{
+		signal(SIGINT, param_sig);
 		v.cmdl = readline("minishell-$ ");
 		if (v.cmdl == NULL)
 			break;
@@ -135,5 +108,5 @@ int main(int ac, char **av, char **env)
 			add_history(v.cmdl);
 		free(v.cmdl);
 	}
-	exit(ft_atoi(v.myenv->value));	
+	exit(_stat(v.myenv));
 }

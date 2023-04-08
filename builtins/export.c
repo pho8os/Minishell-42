@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/07 10:45:07 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 06:45:05 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void export(t_env *myenv, char **arg)
     int i;
     char **sub;
     
-    // print_arg(arg); //!!!!
     exit_status(myenv, 0);
     if (!arg[1] || !arg[1][0])
         return (print_export(myenv));
@@ -62,7 +61,7 @@ void export(t_env *myenv, char **arg)
         sub = subbing(arg[i]);
         if (!check_id(sub[0], arg[i]))
         {
-            builtins_error("export: ", arg[i], ": not a valid identifier\n"); //ther is leaks here
+            fd_printf(2, "export: `%s': not a valid identifier\n", arg[i]); //ther is leaks here
             exit_status(myenv, 1);
         }
         else if (check_id(sub[0], arg[i]) == -1)

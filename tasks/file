@@ -1,4 +1,5 @@
-- signals exit status
+- signals exit status 
+- herdoc get_next_line
 - update malloc
 - wildcars
 - handl msg errors
@@ -6,6 +7,9 @@
 - expind in redrections
 - empty command hystory
 - exit builtins
+ - unset PWD OLDPWD 
+ - ctrl + c double prompt
+ -expund redir
 
 SIGQUIT ctr + \
 SIGINT Ctr + C

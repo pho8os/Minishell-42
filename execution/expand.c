@@ -6,25 +6,58 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:28:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/07 10:36:14 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 08:24:51 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void exit_status(t_env *myenv ,int status)
-{
-    myenv->value = ft_itoa(status);
-}
 
-char *change(t_token *list, t_env *myenv)
+
+void change(t_token **list, t_env *myenv)
 {
-	// if(list->hdoc && ft_strchr(list->token, '$'))
-	// 	return 	(wildmatch(list->token));
-	if (list->expand)
-		return (expand(list->token, myenv));
-	return (list->token);	
+	t_token *tmp;
+	t_token *tmp2;
+	(void)myenv;
+	
+	tmp = *list;
+	if (*list && (*list)->hdoc && ft_strchr((*list)->token, '*'))
+	{
+		*list = wildmatch((*list)->token);
+		lasttok(*list)->next = tmp->next;
+		return ;
+	}
+	while (*list)
+	{
+		tmp2 = *list;
+		if ((*list)->next && (*list)->next->hdoc && ft_strchr((*list)->next->token, '*'))
+		{
+			(*list)->next = wildmatch((*list)->next->token);
+			while (*list)
+			{
+				*list = (*list)->next;
+				
+			}
+			
+			// (*list)->next = tmp;
+			// tmp2 = tmp2->next;
+			printf("apah %s\n", (*list)->token);
+			// printf("tzz %s\n", lasttok(tmp)->token);
+			// lasttok(tmp)->next = *list;
+		}
+		else
+			*list = (*list)->next;
+	}
+	
 }
+// char *change(t_token *list, t_env *myenv)
+// {
+// 	if(list->hdoc && ft_strchr(list->token, '$'))
+// 		(wildmatch(list->token));
+// 	if (list->expand)
+// 		return (expand(list->token, myenv));
+// 	return (list->token);
+// }
 
 
 char *getv(char *str, t_env *env)
@@ -46,6 +79,8 @@ char *expand(char *str, t_env *env)
 	char *p;
 	char *s = NULL;
 	
+	if  (!str)
+		return(NULL);
 	while(str[i])
 	{
 		if(str[i] != '$')

@@ -6,12 +6,12 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 06:52:31 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 05:10:47 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
-//$ echo hdhhdh > $hhh"kkk"
+
 int valid_option(char *arg)
 {
     int i;

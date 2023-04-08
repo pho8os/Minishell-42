@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/07 10:34:53 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 06:45:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void dupenv(t_env **myenv, char **env)
 	ft_lstadd_front(myenv, newenv(ft_strdup("?"), ft_strdup("0"), -2));
 }
 
-// int builting(t_env *myenv, char **arg) //!!
 int builting(t_env *myenv, char **arg, char **argzb) //!!
 {
 	(void) argzb;
@@ -78,10 +77,6 @@ int builting(t_env *myenv, char **arg, char **argzb) //!!
         return (echo(myenv, arg), 1);
 	else
 		return (0);	
-	// i = 0;
-	// while(arg[i])
-	// 	free(arg[i++]);
-	// free(arg);	
 }
 
 

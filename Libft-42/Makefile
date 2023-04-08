@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 07:27:30 by absaid            #+#    #+#              #
-#    Updated: 2023/04/06 07:42:24 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/08 06:30:44 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isdigit.c \
 ft_itoa.c  ft_strncmp.c ft_memcmp.c ft_strlen.c \
 ft_putchar_fd.c ft_putendl_fd.c ft_putstr_fd.c \
 ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c \
-ft_strtrim.c ft_substr.c ft_strstr.c get_next_line.c
+ft_strtrim.c ft_substr.c ft_strstr.c get_next_line.c fd_printf.c ft_putnbr_fd.c
 
 BONUS = ft_lstadd_front.c ft_lstnew.c ft_lstlast.c ft_lstsize.c ft_lstadd_back.c \
 ft_lstclear.c ft_lstchr.c

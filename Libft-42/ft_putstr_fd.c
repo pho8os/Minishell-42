@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 07:35:17 by absaid            #+#    #+#             */
-/*   Updated: 2023/03/16 22:49:59 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 06:27:00 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putstr_fd(const char *s, int fd)
 {
 	if (!s)
-		return ;
-	while (*s)
-		write(fd, s++, 1);
+		write(fd, "(null)", 6);
+	else
+		write(fd, s, ft_strlen(s));
 }

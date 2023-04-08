@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_util.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 00:51:54 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/07 01:53:30 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 01:59:39 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ t_ast *redire_info(t_token **tok)
         return (NULL);
     ((t_redir *)redir)->tok = *tok; // join and change in char * in heder
     ((t_redir *)redir)->arg = join_tokens(*tok); // join and change in char * in heder
-    (type == HEREDOC) && (((t_redir *)redir)->fd_in = heredoc(join_tokens(*tok)));    
+    (type == HEREDOC) && (((t_redir *)redir)->fd_in = heredoc(join_tokens(*tok)));
+    if (type == HEREDOC && !((t_redir *)redir)->fd_in)
+        return((*tok)->type = SIGHER, NULL); // flag to syntax error for skeep msg error
     *tok = (*tok)->next;
     return (redir);
 }

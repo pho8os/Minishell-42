@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/06 07:01:48 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/08 05:29:44 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "builtins.h"
 # include "readline/readline.h"
 # include "readline/history.h"
+
+void param_sig(int signum);
 
 typedef struct s_varibles
 {
