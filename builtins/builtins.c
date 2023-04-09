@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 08:34:44 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:22:04 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char **subbing(char *env)
 	while(env[++i])
 		if(env[i] == '=')
 			break;
-	varandval = malloc(sizeof(char *) * 3);
+	varandval = gc(sizeof(char *) * 3, 1, 0);
 	if (!varandval)
 		return(NULL);
 	varandval[0] = ft_substr(env, 0, i);
@@ -33,7 +33,7 @@ char **subbing(char *env)
 		i = ft_atoi(varandval[1]);
 		(i >= 0) && (i++);
 		(i < 0) && (i = 0);
-		free(varandval[1]);
+
 		varandval[1] = ft_itoa(i);
 	}
 	return(varandval);
@@ -52,7 +52,7 @@ void dupenv(t_env **myenv, char **env)
 	{
 		subenv = subbing(env[i]);
 		addbenv(myenv, newenv(subenv[0], subenv[1], 1));
-		free(subenv);
+
 	}
 }
 

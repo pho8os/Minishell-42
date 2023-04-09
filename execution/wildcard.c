@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcrads.c                                        :+:      :+:    :+:   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:22:37 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 08:55:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 14:03:15 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ bool match(char *obj, char *pattern)
 {
 	int i = 0;
 	char *tok = NULL;
-	
+	if(pattern[0] == '*' && obj[0] == '.')
+		return(false);
 	if(*pattern != '*')
 	{
 		while(pattern[i] && pattern[i] != '*')
@@ -73,10 +74,11 @@ t_token *wildmatch(char *pattern)
 	obj = readdir(dir);
 	while(obj)
 	{
-		if(match(obj->d_name, pattern) && obj->d_name[0] != '.')
+		if(match(obj->d_name, pattern))
 			addtok(&lst, ft_newtoken(0, ft_strdup(obj->d_name), 0, 0));
 		obj = readdir(dir);
 	}
+	closedir(dir);
 	if(!lst)
 		addtok(&lst, ft_newtoken(0, pattern, 0, 0));
 	return(lst);

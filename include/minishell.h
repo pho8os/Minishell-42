@@ -6,13 +6,14 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 08:41:10 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:08:27 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libgc/gc.h"
 # include "../Libft-42/libft.h"
 #include <dirent.h>
 # include <stdbool.h>

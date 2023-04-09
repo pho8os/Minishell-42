@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:29:36 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/06 08:40:47 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:25:36 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static char	*stock_str(char *stock)
 	if (ft_strchr(stock, '\n'))
 	{
 		new_s = ft_strdup(ft_strchr(stock, '\n') + 1);
-		free(stock);
 		return (new_s);
 	}
 	new_s = NULL;
@@ -43,7 +42,7 @@ static char	*stop_at_nel(char *stock)
 	if (!stock)
 		return (NULL);
 	if (stock[0] == '\0')
-		return (free(stock), NULL);
+		return (NULL);
 	if (ft_strchr(stock, '\n'))
 	{
 		gnl = ft_substr(stock, 0, len_new(stock) + 1);
@@ -52,7 +51,6 @@ static char	*stop_at_nel(char *stock)
 	else
 	{
 		gnl = ft_strdup(stock);
-		free(stock);
 		stock = NULL;
 	}
 	return (gnl);
@@ -68,7 +66,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	baf = malloc(BUFFER_SIZE + 1);
+	baf = gc(BUFFER_SIZE + 1, 1, 0);
 	if (!baf)
 		return (NULL);
 	t = BUFFER_SIZE;
@@ -79,10 +77,9 @@ char	*get_next_line(int fd)
 			break ;
 		baf[t] = '\0';
 		temp = ft_strjoin(stock, baf);
-		free(stock);
 		stock = temp;
 	}
 	gnl = stop_at_nel(stock);
 	stock = stock_str(stock);
-	return (free(baf), gnl);
+	return (gnl);
 }

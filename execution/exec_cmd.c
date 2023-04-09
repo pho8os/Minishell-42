@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 09:09:49 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:11:40 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char **trans_myenv(t_env *myenv)
     
     i = 0;
     len = ft_lstsize(myenv);
-    env = malloc(sizeof(char *) * (len + 1));
-    if (!env)
-        return (NULL);
+    env = gc(sizeof(char *) * (len + 1), 1, 0);
     env[len] = 0;
     while (myenv)
     {
@@ -38,7 +36,7 @@ char **trans_list(t_token *list, t_env *myenv)
 
     expand_change(&list, myenv);
     wildcard_change(&list);
-    v.arg = malloc(sizeof(char *) * (size_token(list) + 1));
+    v.arg = gc(sizeof(char *) * (size_token(list) + 1), 1, 0);
     if (!v.arg)
         return (NULL);
     v.i = 0;

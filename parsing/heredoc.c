@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:42:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 07:56:25 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:25:47 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	heredoc(char *lim)
 			break ;
 		write(fd[1], buff, ft_strlen(buff));
 		write(fd[1], "\n", 1);
-		free(buff);
 	}
 	signal(SIGINT, param_sig); // Restoring the signale handler for reading from the prompt
 	if (!isatty(STDIN_FILENO))

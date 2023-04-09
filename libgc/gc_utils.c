@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 07:27:06 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:27:14 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/04/04 06:14:13 by absaid            #+#    #+#             */
+/*   Updated: 2023/04/09 13:41:27 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include"gc.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void ft_gcclear(t_gc **g)
 {
-	char			*str;
-	size_t			i;
-	unsigned int	slen;
+	t_gc *node;
+	
+	while(*g)
+	{
+		node = *g;
+		*g = (*g)->next;
+		free(node->ptr);
+		free(node);
+		node = NULL;
+	}
+	g = NULL;
+}
+t_gc *ft_gcnew(void *ptr)
+{
+	t_gc *g;
+	
+	g = malloc(sizeof(t_gc));
+	if(!g)
+		return(NULL); 
+	return(g->ptr = ptr , g->next = NULL, g);
+}
 
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s + start);
-	if (len > slen)
-		len = slen;
-	str = gc(len + 1, 1, 0);
-	slen = ft_strlen(s);
-	i = -1;
-	while (++i < len && start[s] && start < slen)
-		*(str + i) = *(s + start + i);
-	str[i] = '\0';
-	return (str);
+void gcadd_front(t_gc **gc , t_gc *g)
+{
+	(*gc) && (g->next = *gc);
+	*gc = g;
 }

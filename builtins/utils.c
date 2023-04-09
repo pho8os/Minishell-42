@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 05:11:37 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 11:42:53 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int is_digit(char *str)
     int i;
 
     i = -1;
+    if(str[0] == '-' || str[0] == '+')
+        i++;
     while (str[++i])
         if (!ft_isdigit(str[i]))
             return (0);

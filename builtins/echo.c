@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 08:16:56 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:22:50 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void echo(char **arg)
         else if (!valid_option(arg[1]))
             str = ft_strjoin_sp(str, arg[i], ' ');
     }
+    if (!str)
+        return ;
     if (valid_option(arg[1]))
-        return (ft_putstr_fd(str, 1), free(str));
-    return (ft_putendl_fd(str, 1), free(str));
+        return (ft_putstr_fd(str, 1));
+    return (ft_putendl_fd(str, 1));
 }

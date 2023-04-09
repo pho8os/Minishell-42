@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 08:31:59 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:42:07 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	signal(SIGQUIT, SIG_IGN);
 	dupenv(&v.myenv, env);
+	gc(0, 0, 1);
 	rl_catch_signals = 0; // 
 	while(1)
 	{
@@ -108,6 +109,7 @@ int main(int ac, char **av, char **env)
 		if (*v.cmdl)
 			add_history(v.cmdl);
 		free(v.cmdl);
+		gc(0 , 0, 0);
 	}
 	exit(g_stat);
 }

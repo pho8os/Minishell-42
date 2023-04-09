@@ -1,18 +1,13 @@
 - update malloc
 - Makefile
 - status signal
-- exit builtins
-- unset PWD OLDPWD 
 - ls .*
-- syntax error tokens
+- exit 9999999999999999999999999999999999999
 
 
+$PWD'      'cc
+$PWD"     "%.
 
 SIGQUIT ctr + \
 SIGINT Ctr + C
 SIGKILL Ctr + D
-(ls | ls | ls) || ls 
-$PWD'      'cc
-$PWD"     "%.
- exit 9999999999999999999999999999999999999
- echo -nnn

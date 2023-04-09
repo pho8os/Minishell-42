@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:07 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 08:17:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:22:32 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ char *cd_env(t_env *myenv, const char *variable, char *pwd, int flag)
         return(NULL);
     }
     if (flag)
-    {
-        free(find->value);
         find->value = pwd; 
-    }
     return (find->value);
 }
 
@@ -60,7 +57,7 @@ void cd(t_env *myenv, char **arg)
         oldpwd = ft_strdup(cd_env(myenv, "OLDPWD", NULL, 0));
         execd(myenv, oldpwd, "OLDPWD");
         if (oldpwd)
-            return (printf("%s\n", oldpwd), free(oldpwd));
+            return (printf("%s\n", oldpwd), free(NULL));
         return ;    
     }
     return(execd(myenv, arg[1], ""));

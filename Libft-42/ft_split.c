@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:55:28 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 01:28:18 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:25:10 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,7 @@ static int	count_words(char *str, char c)
 	return (count);
 }
 
-static void	free_all(char **str, int l)
-{
-	while (l)
-	{
-		free(str[l]);
-		l--;
-	}
-	free(str);
-}
+
 
 char	**ft_split(char const *s, char c)
 {
@@ -46,9 +38,7 @@ char	**ft_split(char const *s, char c)
 	l = -1;
 	if (!s)
 		return (NULL);
-	p = (char **)malloc(sizeof (char *) * (count_words((char *)s, c) + 1));
-	if (!p)
-		return (NULL);
+	p = (char **)gc(sizeof (char *) * (count_words((char *)s, c) + 1), 1, 0);
 	while (++l < count_words((char *)s, c))
 	{	
 		while (s[i] && s[i] == c)
@@ -58,7 +48,7 @@ char	**ft_split(char const *s, char c)
 			i++;
 		p[l] = ft_substr(s, j, i - j);
 		if (!p[l])
-			return (free_all(p, l), NULL);
+			return (NULL);
 	}
 	return (p[l] = NULL, p);
 }

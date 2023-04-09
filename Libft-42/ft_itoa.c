@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 05:48:58 by absaid            #+#    #+#             */
-/*   Updated: 2022/10/21 05:08:03 by absaid           ###   ########.fr       */
+/*   Updated: 2023/04/09 13:12:33 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	i = count(n);
 	nb = n;
-	str = malloc(sizeof (char) * (i + 1));
-	if (!str)
-		return (str);
+	str = gc(sizeof (char) * (i + 1), 1, 0);
 	str[i] = '\0';
 	if (n < 0)
 		nb = nb * (-1);
