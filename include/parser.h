@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:35:04 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 05:33:58 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 07:52:58 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ t_ast		*new_cmd(t_token *list);
 t_ast		*new_reder(void);
 t_ast		*new_oper(int type, t_ast *left, t_ast *right);
 t_ast		*new_sub(t_ast *tree);
-t_ast *parser(t_token **tok, t_env *myenv);
+t_ast		*parser(t_token **tok);
 t_ast		*parse_oper(t_token **tok);
 t_ast		*parse_pipe(t_token **tok);
 t_ast		*parse_cmd(t_token **tok);
 t_ast		*parse_sub(t_token **tok);
-t_ast		*redire_info(t_token **tok);
-int		addback_redir(t_ast *tree, t_ast *addin);
+t_ast *redire_info(t_token **tok);
+int			addback_redir(t_ast *tree, t_ast *addin);
 void		addb_list(t_ast *ast, t_token **tok);
-int			heredoc(char *delim);
+int	heredoc(char *lim);
 char		*join_tokens(t_token *node);
-void	close_pipe(int fds[2]);
+void		close_pipe(int fds[2]);
 #endif

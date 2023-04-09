@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:06:53 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 05:09:48 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 09:14:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void exec_subshell(t_ast *ast, t_env *myenv)
     
     pid = fork();
     if (pid == -1)
-        return ;
+        return (perror("fork"));
     if (!pid)
     {
         execution(((t_subsh *)ast)->sub, myenv);
-        exit(_stat(myenv));
+        exit(g_stat);
     }
     waitpid(pid, &stat, WUNTRACED);
-    exit_status(myenv, WEXITSTATUS(stat));
+    exit_status(stat);
 }
 
 void exec_oper(t_ast *ast, t_env *myenv)
 {
     execution(((t_operator *)ast)->left, myenv);
-    if (ast->type == AND && !_stat(myenv))
+    if (ast->type == AND && !g_stat)
         execution(((t_operator *)ast)->right, myenv);
-    if (ast->type == OR && _stat(myenv))
+    if (ast->type == OR && g_stat)
         execution(((t_operator *)ast)->right, myenv);
 }

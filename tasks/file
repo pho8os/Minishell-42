@@ -1,10 +1,18 @@
 - update malloc
-- wildcars
 - Makefile
-- expind in redrections
+- status signal
 - exit builtins
 - unset PWD OLDPWD 
-- ctrl + c double prompt
-- expund redir
+- ls .*
+- syntax error tokens
 
 
+
+SIGQUIT ctr + \
+SIGINT Ctr + C
+SIGKILL Ctr + D
+(ls | ls | ls) || ls 
+$PWD'      'cc
+$PWD"     "%.
+ exit 9999999999999999999999999999999999999
+ echo -nnn

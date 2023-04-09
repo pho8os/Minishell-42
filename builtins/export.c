@@ -6,15 +6,13 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 06:45:05 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:49:18 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
-//export TEST
-//export a=(wc -l)
-//echo "The current directory is: '"$(pwd)"'"
-int check_id(char *ident, char *arg)
+
+static int check_id(char *ident, char *arg)
 {
     if (!ft_isalpha(*ident) && *ident != '_')
         return (0);
@@ -38,9 +36,9 @@ void addvalue(t_env *myenv, char **sub, int prenv, int flag)
     find = ft_lstchr(myenv, tri);
     if (!prenv && find)
         return ;
-    if (!find && !flag)
+    if (!find)
         return (addbenv(&myenv, newenv(tri, sub[1], prenv)));
-    find->print = 1;    
+    find->print = 1; 
     oldval = find->value;
     if (!flag)
         return(find->value = sub[1], free(NULL));
@@ -52,7 +50,7 @@ void export(t_env *myenv, char **arg)
     int i;
     char **sub;
     
-    exit_status(myenv, 0);
+    set_statu(0);
     if (!arg[1] || !arg[1][0])
         return (print_export(myenv));
     i = 0;
@@ -61,8 +59,8 @@ void export(t_env *myenv, char **arg)
         sub = subbing(arg[i]);
         if (!check_id(sub[0], arg[i]))
         {
-            fd_printf(2, "export: `%s': not a valid identifier\n", arg[i]); //ther is leaks here
-            exit_status(myenv, 1);
+            fd_printf(2, "export: `%s': not a valid identifier\n", arg[i]);
+            set_statu(1);
         }
         else if (check_id(sub[0], arg[i]) == -1)
             addvalue(myenv,  sub, 1, 1);

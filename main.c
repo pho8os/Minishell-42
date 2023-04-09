@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 10:37:54 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:31:59 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void print_tok(t_token *tok) //!!
 		
 			// printf("len = %d\n", size_down(tok));
 		tmp = tok->down;
-		printf("\n!%s! |type = %d| |expand = %d|\n", tok->token, tok->type, tok->expand);
+		printf("\n!%s! |type = %d| |hdoc = %d|\n", tok->token, tok->type, tok->hdoc);
 		while (tmp)
 		{
-			printf("** !%s! |type = %d| |expand = %d| **", tmp->token, tmp->type, tmp->expand);
+			printf("** !%s! |type = %d| |hdoc = %d| **", tmp->token, tmp->type, tmp->hdoc);
 			tmp = tmp->down;
 		}
 		puts("\n-----------");
@@ -84,10 +84,11 @@ void print_tree(t_ast *ast, int sp)
 	if (ast->type == AND || ast->type == OR || ast->type == PIPE)
 		print_tree(((t_operator * )ast)->left, sp);
 }
-
+ #include <sys/wait.h>
 int main(int ac, char **av, char **env)
 {
 	t_varibles v;
+	
 	(void)av;
 	(void)ac;
 	signal(SIGQUIT, SIG_IGN);
@@ -101,12 +102,12 @@ int main(int ac, char **av, char **env)
 			break;
 		v.tok = tokenizer(v.cmdl);
 		// print_tok(v.tok);
-		v.ast = parser(&v.tok, v.myenv);
+		v.ast = parser(&v.tok);
 		// print_tree(v.ast, 0);
 		execution(v.ast, v.myenv);
 		if (*v.cmdl)
 			add_history(v.cmdl);
 		free(v.cmdl);
 	}
-	exit(_stat(v.myenv));
+	exit(g_stat);
 }

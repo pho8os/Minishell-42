@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 09:58:24 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 09:15:17 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int create_duping(t_redir *redir, t_env *myenv)
     (redir->typeredir == ROUT || redir->typeredir == APPEND) && (std = 1);
     if (redir->typeredir != HEREDOC)
     {
-        fd = open(redir->tok->token, redir->flags, 0664);
+        if (count_words(expand_prime(redir->tok->token, myenv), ' ') > 1)
+            return(fd_printf(2, "%s: ambiguous redirect\n", redir->tok->token), exit(1) ,0);
+        fd = open(expand_prime(redir->tok->token, myenv), redir->flags, 0664);
         if (fd == -1)
-            return (perror(redir->tok->token), exit(1) ,0);
+            return (perror(expand_prime(redir->tok->token, myenv)), exit(1) ,0);
         if (dup2 (fd, std) == -1)
             return (perror("dup2 "), exit(1) ,0);
         return (close(fd), 1);
@@ -58,7 +60,7 @@ void exec_redir(t_ast *ast, t_env *myenv)
 
     pid = fork();
     if (pid == -1)
-        return ;
+        return (perror("fork"));
     if (!pid)
     {
         while (ast && ast->type == REDIR && create_duping((t_redir *)ast, myenv))
@@ -67,5 +69,5 @@ void exec_redir(t_ast *ast, t_env *myenv)
         exit(0);
     }
     waitpid(pid, &statu, 0);
-    exit_status(myenv, WEXITSTATUS(statu));
+    exit_status(statu);
 }

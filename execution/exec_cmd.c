@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 11:14:29 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 09:09:49 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char **trans_list(t_token *list, t_env *myenv)
             v.tmp = list;
             while (v.tmp)
             {
-                v.str = ft_strjoin(v.str, v.tmp->token);
+                v.str = ft_strjoin(v.str, expand_prime(v.tmp->token, myenv));
                 v.tmp = v.tmp->down;
             }
             v.arg[v.i++] = v.str;
@@ -60,16 +60,6 @@ char **trans_list(t_token *list, t_env *myenv)
         list = list->next;
     }
     return (v.arg[v.i] = 0, v.arg);
-}
-
-char **test_dzb(char **arg) // !!!
-{
-    int i = -1;
-    char *str = NULL;
-    
-    while(arg[++i])
-        str = ft_strjoin_sp(str, arg[i], ' ');
-    return (ft_split(str, ' '));    
 }
 
 char *valid_path(char *arg, char *path)
@@ -97,20 +87,19 @@ void exec_cmd(t_ast *ast, t_env *myenv)
     pid_t pid;
     t_env *tmp;
     int stat;
-    // char **env = trans_myenv(myenv);
 
     arg = trans_list(((t_command *)ast)->list, myenv);
+    if (builting(myenv, arg) || !*arg[0]) //if commad not builing then check empty command
+        return ;
     // int i = -1;
     // while (arg[++i])
     //     printf("arg[%d] =  %s\n",i, arg[i]);
-    if (builting(myenv, arg, arg))
-        return ;
     tmp = ft_lstchr(myenv, "PATH");
     if (!tmp)
-        return (ft_putendl_fd("error", 2));
+        return (fd_printf(2, "%s: No such file or directory\n", arg[0]));
     pid = fork();
     if  (pid == -1)
-        return ;
+        return (perror("fork"));
     if (!pid)
     {
         signal(SIGQUIT, SIG_DFL);
@@ -120,7 +109,5 @@ void exec_cmd(t_ast *ast, t_env *myenv)
         exit(127);
     }
     waitpid(pid, &stat, WUNTRACED);
-    exit_status(myenv, WEXITSTATUS(stat));
-    // printf("\n=== >%d\n", WEXITSTATUS(stat));
-    
+    exit_status(stat);
 }

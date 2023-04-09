@@ -6,13 +6,13 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:17 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/08 06:42:11 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 07:56:32 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-t_ast *parser(t_token **tok, t_env *myenv)
+t_ast *parser(t_token **tok)
 {
     t_ast *tree;
     
@@ -21,7 +21,7 @@ t_ast *parser(t_token **tok, t_env *myenv)
     tree = parse_oper(tok);
     if((!tree || (*tok)->type != END) && (*tok)->type != SIGHER)
     {
-        exit_status(myenv, 258);
+        set_statu(258);
         fd_printf(2, "Syntax : Error unexpected token `%s'\n", (*tok)->token);
         return(NULL);
     }

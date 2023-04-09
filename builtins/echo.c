@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 05:10:47 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:16:56 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int valid_option(char *arg)
     return (1);
 }
 
-void echo(t_env *myenv, char **arg)
+void echo(char **arg)
 {
     int i;
     char *str;
     
-    exit_status(myenv, 0);
+    set_statu(0);
     if (!arg[1])
         return (ft_putendl_fd("", 1));
     str = NULL;

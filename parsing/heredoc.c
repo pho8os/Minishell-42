@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:42:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 05:51:31 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 07:56:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	heredoc(char *lim)
 	}
 	signal(SIGINT, param_sig); // Restoring the signale handler for reading from the prompt
 	if (!isatty(STDIN_FILENO))
-		return(signal_herdoc(fd), 0);
+		return(signal_herdoc(fd), set_statu(1), 0);
 	return (close(fd[1]), fd[0]);
 }

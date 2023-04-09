@@ -6,19 +6,21 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/08 05:12:16 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 05:11:37 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-void print_arg(char **arg) //!!!
+int is_digit(char *str)
 {
-	int i = -1;
-	while (arg[++i])
-	{
-		printf("|%d| %s\n", i, arg[i]);
-	}
+    int i;
+
+    i = -1;
+    while (str[++i])
+        if (!ft_isdigit(str[i]))
+            return (0);
+    return(1);
 }
 
 void swap_data(t_env *a, t_env  *b)
@@ -63,24 +65,4 @@ void print_export(t_env *myenv)
             printf("declare -x %s\n", exp->variable);
         exp = exp->next;
     }
-}
-int is_digit(char *str)
-{
-    int i;
-
-    i = -1;
-    while (str[++i])
-        if (!ft_isdigit(str[i]))
-            return (0);
-    return(1);
-}
-
-void builtins_error(const char *cmd, const char *arg, const char *msg)
-{
-    ft_putstr_fd ("bash : ", STDERR_FILENO);
-    ft_putstr_fd (cmd, STDERR_FILENO);
-    ft_putstr_fd (" : ", STDERR_FILENO);
-    ft_putstr_fd (arg, STDERR_FILENO);
-    ft_putstr_fd(" ", STDERR_FILENO);
-    ft_putstr_fd (msg, STDERR_FILENO);
 }

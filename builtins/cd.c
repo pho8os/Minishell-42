@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:07 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/01 08:04:46 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/09 08:17:42 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void execd(t_env *myenv, const char *path, const char *var)
     char *pwd;
 
     if (!path)
-        return (builtins_error("cd", var, "not set\n"));
+        return (set_statu(1) ,fd_printf(2, "cd %s not set\n", var));
     pwd = getcwd(NULL, 0);
     if (!pwd)
         perror("");   
@@ -52,7 +52,7 @@ void cd(t_env *myenv, char **arg)
 {
     char *oldpwd;
     
-    // print_arg(arg);
+    set_statu(0);
     if (!ft_memcmp("~", arg[1], 2) || !arg[1])
         return (execd(myenv, cd_env(myenv, "HOME", NULL, 0), "HOME"));
     if (!ft_memcmp("-", arg[1], 2))
