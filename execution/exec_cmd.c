@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 06:47:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:24:27 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ char *valid_path(char *arg, t_env *myenv)
     return (paths[0]);
 }
 
-void exec_cmd(t_ast *ast, t_env *myenv)
+void exec_cmd(t_ast *ast, t_env **myenv)
 {
     char **arg;
     pid_t pid;
     int stat;
-
-    arg = trans_list(((t_command *)ast)->list, myenv);
+    
+    arg = trans_list(((t_command *)ast)->list, *myenv);
     if (builting(myenv, arg) || !*arg[0]) //if commad not builing then check empty command
         return ;
     pid = fork();
@@ -98,7 +98,7 @@ void exec_cmd(t_ast *ast, t_env *myenv)
     {
         signal(SIGQUIT, SIG_DFL);
         signal(SIGINT, SIG_DFL);
-        execve(valid_path(arg[0], myenv), arg, trans_myenv(myenv));
+        execve(valid_path(arg[0], *myenv), arg, trans_myenv(*myenv));
         fd_printf(2, "Exec : command not found: %s\n", arg[0]);
         exit(127);
     }

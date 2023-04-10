@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 08:47:55 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:07:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define LEFT 1
 
 t_token		*wildmatch(char *pattern);
-void		execution(t_ast *ast, t_env *myenv);
+void		execution(t_ast *ast, t_env **myenv);
 void		exec_pipe(t_ast *ast, t_env *myenv);
-void		exec_cmd(t_ast *ast, t_env *myenv);
+void		exec_cmd(t_ast *ast, t_env **myenv);
 void		exec_redir(t_ast *ast, t_env *myenv);
 void		exec_subshell(t_ast *ast, t_env *myenv);
 void		exec_oper(t_ast *ast, t_env *myenv);

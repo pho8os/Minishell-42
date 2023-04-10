@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:08:16 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 12:37:34 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ void export(t_env *myenv, char **arg)
     char **sub;
     
     set_statu(0);
-    gc(0, 1, 1);
     if (!arg[1] || !arg[1][0])
-        return (print_export(myenv), gc(0, 1, 1), free(NULL));
+        return (print_export(myenv));
     i = 0;
     while (arg[++i])
     {
@@ -73,5 +72,4 @@ void export(t_env *myenv, char **arg)
             addvalue(myenv,  sub, 1, 0);
         free(sub);    
     }
-    gc(0, 1, 1);
 }

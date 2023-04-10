@@ -1,11 +1,5 @@
-- update malloc
 - Makefile
-- status signal
-
-ls -lR / | wc -c | cat | cat > "tes"t"1266"
-
-$PWD'      'cc
-$PWD"     "%.
+- handle cd 
 
 SIGQUIT ctr + \
 SIGINT Ctr + C

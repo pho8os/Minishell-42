@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/04/10 11:38:35 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/10 12:15:52 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 READLINE_PATH=$(shell brew --prefix readline)
 
-CFLAGS = -Wall -Wextra -Werror  -Iinclude -g -fsanitize=address #-fsanitize=undefined
+CFLAGS = -Wall -Wextra -Werror  -Iinclude -g -fsanitize=address
 
 HEDER = ./include/builtins.h ./include/execution.h ./include/lexer.h ./include/minishell.h ./include/parser.h ./Libft-42/libft.h
 

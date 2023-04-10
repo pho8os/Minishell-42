@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:22 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:16:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:18:17 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,16 @@ static int check_id(char *ident)
     return (0);
 }
 
-
-
-void unset_var(t_env *myenv, char *var)
-{
-    t_env *tmp;
-    
-    while (myenv)
-    {
-        tmp = ft_lstchr(myenv, var);
-        if (tmp)
-            tmp->print = -2;
-        myenv = myenv->next;
-    }
-}
-
-void unset(t_env *myenv, char **arg)
+void unset(t_env **myenv, char **arg)
 {
     int i;
 
-    i = -1;
+    i = 0;
     set_statu(0);
     while (arg[++i])
     {
         if (check_id(arg[i]))
-            delete_node(&myenv, arg[i]);
+            delete_node(myenv, arg[i]);
         else
         {
             fd_printf(2, "unset: `%s': not a valid identifier\n", arg[i]);

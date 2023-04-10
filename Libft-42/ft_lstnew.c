@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:25:51 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 10:54:20 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 12:17:34 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_env	*newenv(char *variable, char *value, int prenv)
 	node -> variable = variable;
 	node -> value = value;
 	node -> print = prenv;
-	// node -> prev = NULL;
 	node -> next = NULL;
 	return (node);
 }

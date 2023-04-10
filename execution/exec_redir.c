@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:37:45 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:13:06 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void exec_redir(t_ast *ast, t_env *myenv)
     {
         while (ast && ast->type == REDIR && create_duping((t_redir *)ast, myenv))
             ast = ((t_redir *)ast)->trdr;
-        execution(ast, myenv);
+        execution(ast, &myenv);
         exit(0);
     }
     waitpid(pid, &statu, 0);

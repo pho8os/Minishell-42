@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:40:58 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:54:47 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:12:32 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int pipe_root(t_ast *ast, t_env *myenv, int fd[2], int std)
         if (dup2(fd[std], std) == -1)
             return (perror("dup2") ,exit(1), 0);
         close_pipe(fd);    
-        execution(ast, myenv);
+        execution(ast, &myenv);
         exit_status(g_stat);
         exit(g_stat);
     }

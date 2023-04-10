@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 09:19:05 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:12:07 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	signal(SIGQUIT, SIG_IGN);
 	dupenv(&v.myenv, env);
-	gc(0, 0, 1);
+	// gc(0, 0, 1);
 	rl_catch_signals = 0; // 
 	while(1)
 	{
@@ -105,11 +105,11 @@ int main(int ac, char **av, char **env)
 		// print_tok(v.tok);
 		v.ast = parser(&v.tok);
 		// print_tree(v.ast, 0);
-		execution(v.ast, v.myenv);
+		execution(v.ast, &v.myenv);
 		if (*v.cmdl)
 			add_history(v.cmdl);
+		// gc(0 , 0, 0);
 		free(v.cmdl);
-		gc(0 , 0, 0);
 	}
 	exit(g_stat);
 }

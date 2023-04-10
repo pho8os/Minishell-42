@@ -6,12 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:00:31 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:11:47 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
-
 
 char **subbing(char *env)
 {
@@ -48,6 +47,7 @@ void dupenv(t_env **myenv, char **env)
 	char **subenv;
 	
 	i = -1;
+	*myenv = NULL;
 	if (!env[0])
 		return(addbenv(myenv, newenv(dup_alloc("PWD"), getcwd(NULL, 0), 1)),
 		addbenv(myenv, newenv(dup_alloc("SHLVL"), dup_alloc("1"), 1)));
@@ -59,16 +59,16 @@ void dupenv(t_env **myenv, char **env)
 	}
 }
 
-int builting(t_env *myenv, char **arg)
+int builting(t_env **myenv, char **arg)
 {
     if (!ft_memcmp("pwd", arg[0], 4))
         return (pwd(), 1);
     else if (!ft_memcmp("cd", arg[0], 3))
-        return (cd(myenv, arg), 1);
+        return (cd(*myenv, arg), 1);
     else if (!ft_memcmp("env", arg[0], 4 ) && !arg[1])
-        return (env(myenv), 1);
+        return (env(*myenv), 1);
     else if (!ft_memcmp("export", arg[0], 7))
-        return (export(myenv , arg), 1);
+        return (export(*myenv , arg), 1);
     else if (!ft_memcmp("unset", arg[0], 6))
         return (unset(myenv , arg), 1);
     else if (!ft_memcmp("exit", arg[0], 5))

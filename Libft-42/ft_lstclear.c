@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:20:04 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:32:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:16:56 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void delete_node(t_env **head, char *var)
     t_env *current = *head;
     t_env *prev = NULL;
 
-    while (current != NULL && ft_memcmp(current->variable, var, ft_strlen(var) + 1) != 0)
+    while (current != NULL && ft_memcmp(current->variable, var, ft_strlen(var) + 1))
     {
         prev = current;
         current = current->next;
@@ -48,6 +48,7 @@ void delete_node(t_env **head, char *var)
     else 
         prev->next = current->next;
     free(current->variable);    
-    free(current->value);    
+    free(current->value);
     free(current);
+    current = NULL;
 }
