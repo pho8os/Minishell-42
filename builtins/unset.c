@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:22 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 09:44:39 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:16:17 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int check_id(char *ident)
     return (0);
 }
 
+
+
 void unset_var(t_env *myenv, char *var)
 {
     t_env *tmp;
@@ -37,34 +39,6 @@ void unset_var(t_env *myenv, char *var)
     }
 }
 
-// void unset_var(t_env *myenv, char *var)
-// {
-//     t_env *tmp;
-//     t_env *tmp2;
-    
-//     tmp2 = myenv;
-//     while (myenv)
-//     {
-//         tmp = lst_find(myenv, var);
-//         // printf("zbb = %d\n", tmp->print);
-//         if (tmp && tmp->print == -2)
-//         {
-//             free(tmp->value);
-//             free(tmp->variable);
-//             // free(tmp);
-//             // tmp = NULL;
-//         }
-//         myenv = myenv->next;
-//     }
-//     while (tmp2)
-//     {
-//         tmp = ft_lstchr(tmp2, var);
-//         if (tmp)
-//             tmp->print = -2;
-//         tmp2 = tmp2->next;
-//     }
-// }
-
 void unset(t_env *myenv, char **arg)
 {
     int i;
@@ -74,7 +48,7 @@ void unset(t_env *myenv, char **arg)
     while (arg[++i])
     {
         if (check_id(arg[i]))
-            unset_var(myenv, arg[i]);
+            delete_node(&myenv, arg[i]);
         else
         {
             fd_printf(2, "unset: `%s': not a valid identifier\n", arg[i]);

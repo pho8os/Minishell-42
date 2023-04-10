@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:40:58 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 08:19:14 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:54:47 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void exec_pipe(t_ast *ast, t_env *myenv)
     pid [0] = pipe_root(((t_operator *)ast)->left, myenv, fd, LEFT);
     if (!pid[0])
         return ;
-    pid [1] =pipe_root(((t_operator *)ast)->right, myenv, fd, RIGHT);
+    pid [1] = pipe_root(((t_operator *)ast)->right, myenv, fd, RIGHT);
     if (!pid[1])
         return ;
     close_pipe(fd);

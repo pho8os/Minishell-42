@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:09:17 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 07:56:32 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 12:00:35 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_ast *parser(t_token **tok)
 {
     t_ast *tree;
     
-    if (!*tok || (*tok)->type == END) // hna ya phobos zamel
+    if (!*tok || (*tok)->type == END)
         return (NULL);
     tree = parse_oper(tok);
     if((!tree || (*tok)->type != END) && (*tok)->type != SIGHER)

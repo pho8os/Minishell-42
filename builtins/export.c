@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:17 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 02:50:16 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:08:16 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ void addvalue(t_env *myenv, char **sub, int prenv, int flag)
     t_env *find;
     
     tri = ft_strtrim(sub[0], "+");
+    free(sub[0]);
     find = ft_lstchr(myenv, tri);
     if (!prenv && find)
-        return ;
+        return(free(tri), free(sub[1])) ;
     if (!find)
         return (addbenv(&myenv, newenv(tri, sub[1], prenv)));
     find->print = 1; 
     oldval = find->value;
+    free(tri);
     if (!flag)
-        return(find->value = sub[1], free(NULL));
-    return(find->value = ft_strjoin(oldval, sub[1]), free(NULL));
+        return(find->value = sub[1], free(oldval));
+    return(find->value = join_allo(oldval, sub[1]), free(sub[1]));
 }
 
 void export(t_env *myenv, char **arg)
@@ -69,6 +71,7 @@ void export(t_env *myenv, char **arg)
             addvalue(myenv,  sub, 0, 0);
         else if (check_id(sub[0], arg[i]) && ft_strchr(arg[i], '='))
             addvalue(myenv,  sub, 1, 0);
+        free(sub);    
     }
     gc(0, 1, 1);
 }

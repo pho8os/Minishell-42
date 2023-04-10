@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 00:51:54 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 08:14:39 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:51:34 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,28 @@ void addb_list(t_ast *ast, t_token **tok) // checking
     *tok = (*tok)->next;
 }
 
+t_token *newtoken(t_token *node)
+{
+	t_token *token;
+
+	token = gc(sizeof(t_token ), 1, 0);
+	token->token = node->token;
+	token->type = node->type; 
+	token->down = node->down;
+	token->expand = node->expand; 
+	token->hdoc = node->hdoc; 
+	token->expand = node->expand; 
+	token->hdoc = node->hdoc; 
+	token->next = NULL; 
+	token->prev = NULL; 
+	return(token);
+}
+
 t_ast *redire_info(t_token **tok)
 {
     int type;
     t_ast *redir;
+    t_token *hold;
        
     if ((*tok)->type != RIN && (*tok)->type != ROUT && (*tok)->type != HEREDOC && (*tok)->type != APPEND)
         return(NULL);
@@ -55,8 +73,9 @@ t_ast *redire_info(t_token **tok)
     *tok = (*tok)->next;
     if ((*tok)->type != WORD)
         return (NULL);
-    ((t_redir *)redir)->tok = *tok; // join and change in char * in heder
-    ((t_redir *)redir)->arg = join_tokens(*tok); // join and change in char * in heder
+    hold = newtoken(*tok);    
+    ((t_redir *)redir)->tok = hold;// join and change in char * in heder
+    ((t_redir *)redir)->arg = join_tokens(hold); // join and change in char * in heder
     (type == HEREDOC) && (((t_redir *)redir)->fd_in = heredoc(join_tokens(*tok)));
     if (type == HEREDOC && !((t_redir *)redir)->fd_in)
         return((*tok)->type = SIGHER, NULL); // flag to syntax error for skeep msg error

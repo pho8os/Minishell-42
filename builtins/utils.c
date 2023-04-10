@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:22:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 11:42:53 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:31:00 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void print_export(t_env *myenv)
 {
     t_env *exp;
     t_env *tmp;
+    t_env *tmp2;
     
     exp = NULL;
     while (myenv)
@@ -52,6 +53,7 @@ void print_export(t_env *myenv)
         addbenv(&exp, newenv(myenv->variable, myenv->value, myenv->print));
         myenv = myenv->next;
     }
+    tmp2 = exp;
     while (exp)
     {
         tmp = exp;
@@ -67,4 +69,5 @@ void print_export(t_env *myenv)
             printf("declare -x %s\n", exp->variable);
         exp = exp->next;
     }
+    ft_lstclear(&tmp2);
 }

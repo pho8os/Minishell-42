@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:26:31 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:13:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:22:56 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,22 @@ char	*ft_strdup(const char *src)
 		dest[i] = src[i];
 	dest[i] = '\0';
 	return (dest);
+}
+
+char	*dup_alloc(const char *s)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = (char *)malloc(ft_strlen(s) + 1);
+	if (!str)
+		return (NULL);
+	while (s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

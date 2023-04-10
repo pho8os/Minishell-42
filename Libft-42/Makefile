@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 07:27:30 by absaid            #+#    #+#              #
-#    Updated: 2023/04/10 09:48:03 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/10 11:39:08 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,15 @@ NAME = libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRCS = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isdigit.c \
 ft_itoa.c  ft_strncmp.c ft_memcmp.c ft_strlen.c \
 ft_putchar_fd.c ft_putendl_fd.c ft_putstr_fd.c \
 ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c \
 ft_strtrim.c ft_substr.c ft_strstr.c get_next_line.c fd_printf.c ft_putnbr_fd.c \
-ft_lstadd_front.c ft_lstnew.c ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstchr.c
+ft_lstadd_front.c ft_lstnew.c ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstchr.c \
+ft_lstclear.c
 
 OBJS = $(SRCS:.c=.o)
 

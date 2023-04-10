@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 10:14:13 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:00:31 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,22 @@ char **subbing(char *env)
 	while(env[++i])
 		if(env[i] == '=')
 			break;
-	varandval = gc(sizeof(char *) * 3, 1, 0);
-	varandval[0] = ft_substr(env, 0, i);
+	varandval = malloc(sizeof(char *) * 3);
+	if (!varandval)
+		return(NULL);
+	varandval[0] = sub_malloc(env, 0, i);
 	if (ft_strchr(env, '='))
-		varandval[1] = ft_substr(env, i + 1, ft_strlen(env + i));
+		varandval[1] = sub_malloc(env, i + 1, ft_strlen(env + i));
 	else
-		varandval[1] = ft_strdup("");	
+		varandval[1] = dup_alloc("");	
 	varandval[2] = NULL;
 	if(!ft_memcmp("SHLVL", varandval[0], 6))
 	{
 		i = ft_atoi(varandval[1]);
 		(i >= 0) && (i++);
 		(i < 0) && (i = 0);
-		varandval[1] = ft_itoa(i);
+		free(varandval[1]);
+		varandval[1] = itoa_allo(i);
 	}
 	return(varandval);
 }
@@ -46,12 +49,13 @@ void dupenv(t_env **myenv, char **env)
 	
 	i = -1;
 	if (!env[0])
-		return(addbenv(myenv, newenv(ft_strdup("PWD"), getcwd(NULL, 0), 1)),
-		addbenv(myenv, newenv(ft_strdup("SHLVL"), ft_strdup("1"), 1)));
+		return(addbenv(myenv, newenv(dup_alloc("PWD"), getcwd(NULL, 0), 1)),
+		addbenv(myenv, newenv(dup_alloc("SHLVL"), dup_alloc("1"), 1)));
 	while (env[++i])
 	{
 		subenv = subbing(env[i]);
 		addbenv(myenv, newenv(subenv[0], subenv[1], 1));
+		free(subenv);
 	}
 }
 
