@@ -6,11 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 10:32:54 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:42:07 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 04:41:37 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "minishell.h"
 
 
 void print_tok(t_token *tok) //!!
@@ -102,7 +102,7 @@ int main(int ac, char **av, char **env)
 		if (v.cmdl == NULL)
 			break;
 		v.tok = tokenizer(v.cmdl);
-		// print_tok(v.tok);
+		print_tok(v.tok);
 		v.ast = parser(&v.tok);
 		// print_tree(v.ast, 0);
 		execution(v.ast, v.myenv);

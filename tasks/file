@@ -1,7 +1,6 @@
 - update malloc
 - Makefile
 - status signal
-- ls .*
 - exit 9999999999999999999999999999999999999
 
 

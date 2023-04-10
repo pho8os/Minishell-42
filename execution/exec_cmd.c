@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 13:11:40 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 04:55:42 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char **trans_list(t_token *list, t_env *myenv)
     expand_change(&list, myenv);
     wildcard_change(&list);
     v.arg = gc(sizeof(char *) * (size_token(list) + 1), 1, 0);
-    if (!v.arg)
-        return (NULL);
     v.i = 0;
     v.str = NULL;
     while (list)
@@ -49,7 +47,8 @@ char **trans_list(t_token *list, t_env *myenv)
             v.tmp = list;
             while (v.tmp)
             {
-                v.str = ft_strjoin(v.str, expand_prime(v.tmp->token, myenv));
+                v.str = ft_strjoin(v.str, v.tmp->token);
+                // v.str = ft_strjoin(v.str, expand_prime(v.tmp->token, myenv));
                 v.tmp = v.tmp->down;
             }
             v.arg[v.i++] = v.str;
@@ -89,9 +88,6 @@ void exec_cmd(t_ast *ast, t_env *myenv)
     arg = trans_list(((t_command *)ast)->list, myenv);
     if (builting(myenv, arg) || !*arg[0]) //if commad not builing then check empty command
         return ;
-    // int i = -1;
-    // while (arg[++i])
-    //     printf("arg[%d] =  %s\n",i, arg[i]);
     tmp = ft_lstchr(myenv, "PATH");
     if (!tmp)
         return (fd_printf(2, "%s: No such file or directory\n", arg[0]));

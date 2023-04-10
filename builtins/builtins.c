@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 13:22:04 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 02:55:36 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ char **subbing(char *env)
 		if(env[i] == '=')
 			break;
 	varandval = gc(sizeof(char *) * 3, 1, 0);
-	if (!varandval)
-		return(NULL);
 	varandval[0] = ft_substr(env, 0, i);
-	varandval[1] = ft_substr(env, i + 1, ft_strlen(env + i));
+	if (ft_strchr(env, '='))
+		varandval[1] = ft_substr(env, i + 1, ft_strlen(env + i));
+	else
+		varandval[1] = ft_strdup("");	
 	varandval[2] = NULL;
 	if(!ft_memcmp("SHLVL", varandval[0], 6))
 	{
 		i = ft_atoi(varandval[1]);
 		(i >= 0) && (i++);
 		(i < 0) && (i = 0);
-
 		varandval[1] = ft_itoa(i);
 	}
 	return(varandval);

@@ -6,20 +6,20 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:08:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:15:14 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 02:41:31 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
 
-void	*gc(size_t size, int param, int a)
+void	*gc(size_t size, int param, int swap)
 {
 	static t_gc	*head;
 	static t_gc	*head2;
 	void		*address;
 	static bool	mode;
 
-	(a == 1) && (mode = !mode);
+	(swap == 1) && (mode = !mode);
 	if (param == 1)
 	{
 		address = malloc(size);

@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:28:56 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 08:36:02 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 05:03:38 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,23 @@ char *expand_prime(char *str, t_env *env)
 }
 
 t_token *expand(char *str, t_env *env, int flag)
+{
+	int i;
+	t_token *head;
+	char **strs;
+
+	i = -1;
+	head = NULL;
+	if (!flag)
+		return(addtok(&head, ft_newtoken(WORD, expand_prime(str, env), 0, 0)), head);
+	strs = ft_split(expand_prime(str, env), ' ');
+	if (!*strs)
+		return(addtok(&head, ft_newtoken(WORD, ft_strdup(""), 0, 0)), head);
+	while (strs[++i])
+		addtok(&head, ft_newtoken(WORD, strs[i], 0, 0));	
+	return(head);
+}
+t_token *expand_down(char *str, t_env *env, int flag)
 {
 	int i;
 	t_token *head;

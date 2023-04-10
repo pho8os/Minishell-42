@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 08:40:46 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 05:03:49 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		exit_status(int status);
 void		set_statu(int status);
 void		set_statug(int status);
 void		param_sig(int signum);
+t_token *expand_down(char *str, t_env *env, int flag);
 typedef struct s_vartrans_list
 {
 	int		i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: absaid <absaid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:08:39 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 06:49:45 by absaid           ###   ########.fr       */
+/*   Updated: 2023/04/10 01:40:46 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_gc
 	struct s_gc *next;
 } t_gc;
 
-void	*gc(size_t size, int param, int a);
+void	*gc(size_t size, int param, int swap);
 void ft_gcclear(t_gc **g);
 t_gc *ft_gcnew(void *ptr);
 void gcadd_front(t_gc **gc , t_gc *g);
