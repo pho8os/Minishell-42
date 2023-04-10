@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:30:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/07 08:41:06 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:46:12 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,125 +14,89 @@
 #include "minishell.h"
 
 
-char *getword(char *str, int *index)
+void norminit(t_norm *ptr)
 {
-	int i;
-	int j;
-	
-	i = *index;
-	j = i;
-	while(str[i] && !ft_strchr("\"\'|<>&() \t", str[i]))
-		i++;
-	return(*index = i - 1, ft_substr(str, j, i - j));
+	ptr->i = -1;
+	ptr->token = 0;
+	ptr->down = 0;
+	ptr->dq = false;
+	ptr->sq = false;
+	ptr->space = true;
+	ptr->op = 0;
+	ptr->cp = 0;
 }
 
-char *getq(char *str, int *index, char c)
+void norm_1(t_norm *n, char *c)
 {
-	int i;
-	int j;
-	
-	i = *index;
-	j = i;
-	while(str[i] && str[i] != c)
-		i++;
-	if(!str[i])
-		return(*index = i - 1, ft_substr(str, j, i - j));
-	return(*index = i - 1, ft_substr(str, j, i - j));
+	(c[n->i] == '\'') && (n->sq = !n->sq);
+	(c[n->i] == '\"') && (n->dq = !n->dq);
+	(ft_strchr("|<>&", c[n->i]) && c[n->i] == c[n->i + 1]) && (n->x = 1);
+	(c[n->i] != '\'' && c[n->i] != '\"') && (n->space = true);
+	(c[n->i] == '(') && (n->op += 1);
+	(c[n->i] == ')') && (n->cp += 1);
+	if(!allspace(n->i, c) && c[n->i] != '\'' && c[n->i] != '\"' && c[n->i] != ' ' && c[n->i] != '\t')
+		addtok(&n->token, ft_newtoken(getflag(c[n->i], n->x), ft_substr(c, n->i, n->x + 1), 0, 0));
+	if(c[n->i] == ' ' || c[n->i] == '\t')
+	{
+		while((c[n->i] == ' ' || c[n->i] == '\t') && c[n->i])
+			n->i++;
+		n->i--;
+	}
+	n->i += n->x;
 }
-int getflag(char c, int flag)
-{
-	char *str;
-	int i;
 
-	i = -1;
-	str = "\"\'|<>()";
-	while(str[++i])
-		if(str[i] == c)
-			break ;
-	if (c == '&' && !flag)
-		return(0);
-	else if(c == '&' && flag)
-		return (9);
-	(flag) && (i += 7);
-	return(i + 1);
-}
-int allspace(int i, char *c)
+void norm_2(t_norm *n, char *c)
 {
-	while(c[i] && c[i] == ' ')
-		i++;
-	if(c[i])
-		return 0;
-	else 
-		return 1;
+	if(n->space)
+	{
+		addtok(&n->token, ft_newtoken(WORD, getq(c, &n->i, c[n->i - 1]), (n->dq == true), 0));
+		n->space = false;
+	}
+	else if(!n->space)
+	{
+		n->down = lasttok(n->token);
+		while(n->down->down)
+			n->down = n->down->down;
+		n->down->down = ft_newtoken(WORD, getq(c, &n->i, c[n->i - 1]), (n->dq == true), 0);
+	}
+}
+
+void norm_3(t_norm *n, char *c)
+{
+	if(n->space)
+	{
+		addtok(&n->token, ft_newtoken(WORD, getword(c, &n->i), 1, 1));
+		n->space = false;
+	}
+	else if(!n->space)
+	{
+		n->down = lasttok(n->token);
+		while(n->down->down)
+			n->down = n->down->down;
+		n->down->down = ft_newtoken(WORD, getword(c, &n->i), 1, 1);
+	}
 }
 
 t_token *tokenizer(char *c)
 {
-	int	i = -1;
-	t_token *token = 0;
-	t_token *down = 0;
-	bool dq = false;
-	bool sq = false;
-	bool space = true;
-	int x;
-	int op = 0;
-	int cp = 0;
+	t_norm n;
 	
-	while(c[++i])
+	norminit(&n);
+	while(c[++(n.i)])
 	{
-		x = 0;
-		if((sq && c[i] != '\'') || (dq && c[i] != '\"'))
-		{
-			if(space)
-			{
-				addtok(&token, ft_newtoken(WORD, getq(c, &i, c[i - 1]), (dq == true), 0));
-				space = false;
-			}
-			else if(!space)
-			{
-				down = lasttok(token);
-				while(down->down)
-					down = down->down;
-				down->down = ft_newtoken(WORD, getq(c, &i, c[i - 1]), (dq == true), 0);
-			}
-		}
-		else if(ft_strchr("\"\'|<>&() \t", c[i]))
-		{
-			(c[i] == '\'') && (sq = !sq);
-			(c[i] == '\"') && (dq = !dq);
-			(ft_strchr("|<>&", c[i]) && c[i] == c[i + 1]) && (x = 1);
-			(c[i] != '\'' && c[i] != '\"') && (space = true);
-			(c[i] == '(') && (op += 1);
-			(c[i] == ')') && (cp += 1);
-			if(!allspace(i, c) && c[i] != '\'' && c[i] != '\"' && c[i] != ' ' && c[i] != '\t')
-				addtok(&token, ft_newtoken(getflag(c[i], x), ft_substr(c, i, x + 1), 0, 0));
-			if(c[i] == ' ' || c[i] == '\t')
-			{
-				while((c[i] == ' ' || c[i] == '\t') && c[i])
-					i++;
-				i--;
-			}
-			i+= x;
-		}
-		else if(!ft_strchr("\"\'|<>&() \t", c[i]) && (!dq || !sq))
-		{
-			if(space)
-			{
-				addtok(&token, ft_newtoken(WORD, getword(c, &i), 1, 1));
-				space = false;
-			}
-			else if(!space)
-			{
-				down = lasttok(token);
-				while(down->down)
-					down = down->down;
-				down->down = ft_newtoken(WORD, getword(c, &i), 1, 1);
-			}
-		}
+		n.x = 0;
+		if((n.sq && c[n.i] != '\'') || (n.dq && c[n.i] != '\"'))
+			norm_2(&n, c);
+		else if(ft_strchr("\"\'|<>&() \t", c[n.i]))
+			norm_1(&n, c);
+		else if(!ft_strchr("\"\'|<>&() \t", c[n.i]) && (!n.dq || !n.sq))
+			norm_3(&n, c);
 	}
-	if((sq || dq) || (op != cp))
-		return(puts("Syntax : Quote or parantes"), NULL);
-	addtok(&token, ft_newtoken(END, ft_strdup("newline"), 0, 0));
-	return(token);
+	if((n.sq || n.dq) || (n.op != n.cp))
+		return(fd_printf(2, "Syntax : Quote Unfound\n"), NULL);
+	if(n.op != n.cp)
+		return(fd_printf(2, "Syntax : Need a parantes\n"), NULL);
+	addtok(&n.token, ft_newtoken(END, ft_strdup("newline"), 0, 0));
+	return(n.token);
 	
 }

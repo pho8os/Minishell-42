@@ -5,77 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 04:27:20 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:21:21 by yettabaa         ###   ########.fr       */
+/*   Created: 2023/04/10 08:40:34 by yettabaa          #+#    #+#             */
+/*   Updated: 2023/04/10 08:46:10 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
 #include "minishell.h"
 
-t_token *ft_newtoken(e_flag type, char *word, int flag, int hdoc)
+char *getword(char *str, int *index)
 {
-	t_token *token;
-
-	token = gc(sizeof(t_token ), 1, 0);
-	token->token = word;
-	token->type = type;
-	token->next = NULL;
-	token->prev = NULL;
-	token->down = NULL;
-	token->expand = false;
-	token->hdoc = false;
-	(flag) && (token->expand = true);
-	(hdoc) && (token->hdoc = true);
-	return(token);
-}
-
-t_token	*lasttok(t_token *lst)
-{
-	while (lst)
-	{
-		if (lst->next == NULL)
-			break ;
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-void	addtok(t_token **lst, t_token *new)
-{
-	if (!lst)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	new->prev = lasttok(*lst);
-	lasttok(*lst)->next = new;
-	new->next = NULL;
-}
-
-t_token	*lasttok_down(t_token *lst)
-{
-	while (lst)
-	{
-		if (lst->down == NULL)
-			break ;
-		lst = lst->down;
-	}
-	return (lst);
-}
-
-int	size_token(t_token *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
+	int i;
+	int j;
+	
+	i = *index;
+	j = i;
+	while(str[i] && !ft_strchr("\"\'|<>&() \t", str[i]))
 		i++;
-	}
-	return (i);
+	return(*index = i - 1, ft_substr(str, j, i - j));
 }
+
+char *getq(char *str, int *index, char c)
+{
+	int i;
+	int j;
+	
+	i = *index;
+	j = i;
+	while(str[i] && str[i] != c)
+		i++;
+	if(!str[i])
+		return(*index = i - 1, ft_substr(str, j, i - j));
+	return(*index = i - 1, ft_substr(str, j, i - j));
+}
+int getflag(char c, int flag)
+{
+	char *str;
+	int i;
+
+	i = -1;
+	str = "\"\'|<>()";
+	while(str[++i])
+		if(str[i] == c)
+			break ;
+	if (c == '&' && !flag)
+		return(0);
+	else if(c == '&' && flag)
+		return (9);
+	(flag) && (i += 7);
+	return(i + 1);
+}
+int allspace(int i, char *c)
+{
+	while(c[i] && c[i] == ' ')
+		i++;
+	if(c[i])
+		return 0;
+	else 
+		return 1;
+}
+

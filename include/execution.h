@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 05:03:49 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:47:55 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ void		exit_status(int status);
 void		set_statu(int status);
 void		set_statug(int status);
 void		param_sig(int signum);
-t_token *expand_down(char *str, t_env *env, int flag);
+char **trans_list(t_token *list, t_env *myenv);
+char *handle_non_valid_variable(char *str, int *i);
+char *handle_env_variable(char *str, t_env *env, int *i, int j);
+char *handle_variable(char *str, t_env *env, int *i);
+char *handle_non_variable(char *str, int *i);
+char *getv(char *str, t_env *env);
 typedef struct s_vartrans_list
 {
 	int		i;

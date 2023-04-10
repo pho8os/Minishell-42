@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:40:58 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 12:08:31 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 08:19:14 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void exec_pipe(t_ast *ast, t_env *myenv)
     if (!pid[1])
         return ;
     close_pipe(fd);
-    if (wait(&stat) == pid[1])
-        set_statu(stat);
-    if (wait(&stat) == pid[1])
-        set_statu(stat);
+    waitpid(pid[1], &stat, 0);
+    set_statu(stat);
+    while (wait(NULL) != -1)
+        ;
 }

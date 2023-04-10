@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:25:05 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:01:09 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 05:37:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ long long int	ft_atoi(const char *str)
 		if (result > 9223372036854775807)
 			return (-1);
 	}
-	return ((int)result * n);
+	return (result * n);
 }

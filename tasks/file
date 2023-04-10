@@ -1,8 +1,8 @@
 - update malloc
 - Makefile
 - status signal
-- exit 9999999999999999999999999999999999999
 
+ls -lR / | wc -c | cat | cat > "tes"t"1266"
 
 $PWD'      'cc
 $PWD"     "%.

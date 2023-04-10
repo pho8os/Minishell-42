@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 23:03:39 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 02:55:36 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 10:14:13 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void dupenv(t_env **myenv, char **env)
 	{
 		subenv = subbing(env[i]);
 		addbenv(myenv, newenv(subenv[0], subenv[1], 1));
-
 	}
 }
 

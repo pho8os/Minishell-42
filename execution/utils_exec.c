@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 01:27:00 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 05:02:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 05:15:45 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,80 +58,16 @@ void	wildcard_change(t_token **list)
 	}
 }
 
-void	norme_xpand_down(t_token **list, t_env *env)
-{
-	t_token *hold;
-	t_token	*t;
-	t_token	*t2;
-
-	t2 = *list;
-	t = *list;
-	while (t2)
-	{
-		t = t2->down;
-		if (t2->down && t2->down->expand && ft_strchr(t2->down->token, '$'))
-		{
-			if (!ft_memcmp(t2->token, "export", 7) || (!t2->down->hdoc))
-				hold = expand(t2->down->token, env, 0);
-			else
-				hold = expand(t2->down->token, env, 1);
-			(t2->down = hold);
-			(t->hdoc) && (t2->down->hdoc = 1); // expinding with wildcard
-			lasttok_down(t2->down)->down = t->down;
-		}
-		
-		else
-			t2 = t2->next;
-	}
-}
-
-void	expand_change_down(t_token **list, t_env *env)
-{
-	t_token	*t;
-	t_token	*t2;
-
-	t2 = *list;
-	t = *list;
-	if (t2 && t2->expand && ft_strchr(t2->token, '$'))
-	{
-		(!t2->hdoc) && (t2 = expand(t2->token, env, 0));
-		(t2->hdoc) && (t2 = expand(t2->token, env, 1));
-		(t->hdoc) && (t2->hdoc = 1); // expinding with wildcard
-		return (lasttok_down(t2)->down = t->down, *list = t2, free(NULL));
-	}
-	norme_xpand_down(list, env);
-}
-
 void	norme_xpand(t_token **list, t_env *env)
 {
 	t_token *hold;
 	t_token	*t;
 	t_token	*t2;
-	t_token	*t3;
 
 	t2 = *list;
 	t = *list;
 	while (t2)
 	{
-		t3 = t2->down;
-		if (t3)
-			expand_change_down(&t3, env);
-		// while (t3)
-		// {
-		// 	// t = t3;
-		// 	// if (t3 && t3->expand && ft_strchr(t3->token, '$'))
-		// 	// {
-		// 	// 	if (!ft_memcmp(t2->token, "export", 7) || (!t2->next->hdoc))
-		// 	// 		hold = expand(t2->next->token, env, 0);
-		// 	// 	else
-		// 	// 		hold = expand(t2->next->token, env, 1);
-		// 	// 	(t2->next = hold);
-		// 	// 	(t->hdoc) && (t2->next->hdoc = 1); // expinding with wildcard
-		// 	// 	(t->down) && (lasttok(t2->next)->down = t->down);
-		// 	// 	lasttok(t2->next)->next = t->next;
-		// 	// }
-		// 	t3 = t3->down;
-		// }
 		t = t2->next;
 		if (t2->next && t2->next->expand && ft_strchr(t2->next->token, '$'))
 		{
@@ -144,7 +80,6 @@ void	norme_xpand(t_token **list, t_env *env)
 			(t->down) && (lasttok(t2->next)->down = t->down);
 			lasttok(t2->next)->next = t->next;
 		}
-		
 		else
 			t2 = t2->next;
 	}

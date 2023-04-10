@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 10:55:28 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/09 13:25:10 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 06:06:07 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static int	count_words(char *str, char c)
 			count++;
 	return (count);
 }
-
-
 
 char	**ft_split(char const *s, char c)
 {

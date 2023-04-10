@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 07:28:50 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 09:15:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 07:35:28 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ int create_duping(t_redir *redir, t_env *myenv)
 {
     int fd;
     int std;
-
+    char **file;
+    
     (redir->typeredir == RIN || redir->typeredir == HEREDOC) && (std = 0);
     (redir->typeredir == ROUT || redir->typeredir == APPEND) && (std = 1);
     if (redir->typeredir != HEREDOC)
     {
-        if (count_words(expand_prime(redir->tok->token, myenv), ' ') > 1)
+        file = trans_list(redir->tok, myenv);
+        if (file[1])
             return(fd_printf(2, "%s: ambiguous redirect\n", redir->tok->token), exit(1) ,0);
-        fd = open(expand_prime(redir->tok->token, myenv), redir->flags, 0664);
+        fd = open(file[0], redir->flags, 0664);
         if (fd == -1)
             return (perror(expand_prime(redir->tok->token, myenv)), exit(1) ,0);
         if (dup2 (fd, std) == -1)
@@ -50,7 +52,7 @@ int create_duping(t_redir *redir, t_env *myenv)
     (redir->tok->hdoc && !redir->tok->down) && (redir->fd_in = expand_herdoc(redir->fd_in, myenv));
     if (dup2 (redir->fd_in, std) == -1)
         return (perror("dup2"), exit(1) ,0);
-    return(1);        
+    return(1);   
 }
 
 void exec_redir(t_ast *ast, t_env *myenv)

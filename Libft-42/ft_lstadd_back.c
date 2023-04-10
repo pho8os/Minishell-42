@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:24:58 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/04 02:47:15 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 05:50:06 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	addbenv(t_env **lst, t_env *new)
 {
 	t_env	*tmp;
-	
+
 	if (!lst)
 		return ;
 	if (!*lst)

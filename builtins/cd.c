@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:07 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 13:22:32 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 07:20:22 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void execd(t_env *myenv, const char *path, const char *var)
         return (set_statu(1) ,fd_printf(2, "cd %s not set\n", var));
     pwd = getcwd(NULL, 0);
     if (!pwd)
-        perror("");   
+        fd_printf(2, "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n"); 
     ret = chdir(path);
     if (ret != 0)
         return (perror(path));

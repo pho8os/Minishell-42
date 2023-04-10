@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 02:42:44 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 04:55:42 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 06:47:42 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ char **trans_list(t_token *list, t_env *myenv)
             v.tmp = list;
             while (v.tmp)
             {
-                v.str = ft_strjoin(v.str, v.tmp->token);
-                // v.str = ft_strjoin(v.str, expand_prime(v.tmp->token, myenv));
+                v.str = ft_strjoin(v.str, expand_prime(v.tmp->token, myenv));
                 v.tmp = v.tmp->down;
             }
             v.arg[v.i++] = v.str;
@@ -59,16 +58,21 @@ char **trans_list(t_token *list, t_env *myenv)
     return (v.arg[v.i] = 0, v.arg);
 }
 
-char *valid_path(char *arg, char *path)
+char *valid_path(char *arg, t_env *myenv)
 {
     int i;
     char *new_arg;
     char **paths;
+    t_env *tmp; 
     
     i = -1;
-    if (!access(arg, X_OK))
+    // printf("%s\n", arg);//!
+    if (*arg == '/' || !access(arg, X_OK))
         return (arg);
-    paths = ft_split(path, ':');
+    tmp = ft_lstchr(myenv, "PATH");
+    if (!tmp)
+        return (fd_printf(2, "%s: No such file or directory\n", arg), NULL);
+    paths = ft_split(tmp->value, ':');
     while (paths[++i])
     {
         new_arg = ft_strjoin_sp(paths[i], arg, '/');
@@ -82,15 +86,11 @@ void exec_cmd(t_ast *ast, t_env *myenv)
 {
     char **arg;
     pid_t pid;
-    t_env *tmp;
     int stat;
 
     arg = trans_list(((t_command *)ast)->list, myenv);
     if (builting(myenv, arg) || !*arg[0]) //if commad not builing then check empty command
         return ;
-    tmp = ft_lstchr(myenv, "PATH");
-    if (!tmp)
-        return (fd_printf(2, "%s: No such file or directory\n", arg[0]));
     pid = fork();
     if  (pid == -1)
         return (perror("fork"));
@@ -98,7 +98,7 @@ void exec_cmd(t_ast *ast, t_env *myenv)
     {
         signal(SIGQUIT, SIG_DFL);
         signal(SIGINT, SIG_DFL);
-        execve(valid_path(arg[0], tmp->value), arg, trans_myenv(myenv));
+        execve(valid_path(arg[0], myenv), arg, trans_myenv(myenv));
         fd_printf(2, "Exec : command not found: %s\n", arg[0]);
         exit(127);
     }

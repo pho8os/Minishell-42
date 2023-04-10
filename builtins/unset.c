@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 02:08:22 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 08:49:10 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/10 09:44:39 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,34 @@ void unset_var(t_env *myenv, char *var)
         myenv = myenv->next;
     }
 }
+
+// void unset_var(t_env *myenv, char *var)
+// {
+//     t_env *tmp;
+//     t_env *tmp2;
+    
+//     tmp2 = myenv;
+//     while (myenv)
+//     {
+//         tmp = lst_find(myenv, var);
+//         // printf("zbb = %d\n", tmp->print);
+//         if (tmp && tmp->print == -2)
+//         {
+//             free(tmp->value);
+//             free(tmp->variable);
+//             // free(tmp);
+//             // tmp = NULL;
+//         }
+//         myenv = myenv->next;
+//     }
+//     while (tmp2)
+//     {
+//         tmp = ft_lstchr(tmp2, var);
+//         if (tmp)
+//             tmp->print = -2;
+//         tmp2 = tmp2->next;
+//     }
+// }
 
 void unset(t_env *myenv, char **arg)
 {
