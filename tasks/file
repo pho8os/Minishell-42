@@ -1,6 +1,14 @@
 - Makefile
 - handle cd 
 
+- forbid function [a-zA-Z_][a-zA-Z0-9_]*\(.*?\)
+// exit - : 5ss itele3 error and exit process.
+// exit -1 : exit bla error.
+//<< $HOME // LEAKS
+
+
+
 SIGQUIT ctr + \
 SIGINT Ctr + C
 SIGKILL Ctr + D
+export $filename=Makefile

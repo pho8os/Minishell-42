@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 00:30:36 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 11:12:17 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:45:14 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	str[j] = '\0';
 	return (str);
 }
+
 char	*join_allo(const char *s1, const char *s2)
 {
 	int		i;

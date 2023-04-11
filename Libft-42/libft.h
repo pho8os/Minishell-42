@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 11:28:06 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 07:02:48 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int					ft_isdigit(int c);
 int					ft_strlen(const char *str);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 char				*ft_itoa(int n);
-char	*itoa_allo(int n);
+char				*itoa_allo(int n);
 char				*ft_strjoin(const char *s1, const char *s2);
 char				*_strjoin(const char *s1, const char *s2);
-char	*join_allo(const char *s1, const char *s2);
+char				*join_allo(const char *s1, const char *s2);
 char				*ft_strjoin_sp(char const *s1, char const *s2, char c);
 char				*ft_strchr(const char *s, int c);
 void				*ft_memchr(const void *s, int c, size_t n);
@@ -49,10 +49,11 @@ int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 long long int		ft_atoi(const char *str);
+long long int		atoi_exit(const char *str, int *flag);
 char				*ft_strdup(const char *src);
-char	*dup_alloc(const char *s);
+char				*dup_alloc(const char *s);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char	*sub_malloc(char const *s, unsigned int start, size_t len);
+char				*sub_malloc(char const *s, unsigned int start, size_t len);
 char				*ft_strstr(char *str, char *to_find);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
@@ -67,9 +68,11 @@ void				addbenv(t_env **lst, t_env *new);
 int					ft_lstsize(t_env *lst);
 t_env				*ft_lstlast(t_env *lst);
 t_env				*ft_lstchr(t_env *lst, const char *variable);
-t_env	*lst_find(t_env *lst, const char *variable);
-void	ft_lstclear(t_env **lst);
-void delete_node(t_env **head, char *var);
+t_env				*lst_find(t_env *lst, const char *variable);
+void				ft_lstclear(t_env **lst);
+void				delete_node(t_env **head, char *var);
+char				*trim_allo(char const *s1, char const *set);
+char				**split_wc(char *str);
 void				fd_printf(int fd, const char *fmt, ...);
 
 #endif

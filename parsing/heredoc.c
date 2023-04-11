@@ -6,39 +6,39 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:42:11 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/09 13:25:47 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:53:08 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *join_tokens(t_token *node)
+char	*join_tokens(t_token *node)
 {
-	char *str;
-    
+	char	*str;
+
 	str = NULL;
-	while(node)
+	while (node)
 	{
 		str = ft_strjoin(str, node->token);
 		node = node->down;
 	}
-	return(str);
+	return (str);
 }
 
-void param_herdoc(int signum)
+void	param_herdoc(int signum)
 {
-	(void) signum;
+	(void)signum;
 	close(STDIN_FILENO);
 }
 
-void signal_herdoc(int fd[2])
+void	signal_herdoc(int fd[2])
 {
-	int		fdt;
-	
+	int	fdt;
+
 	fdt = open(ttyname(STDERR_FILENO), O_RDONLY);
 	if (fdt == -1)
-		return(close_pipe(fd), ft_putendl_fd("open sig_her", 2)); //
-	close_pipe(fd);  
+		return (close_pipe(fd), ft_putendl_fd("open sig_her", 2));
+	close_pipe(fd);
 }
 
 int	heredoc(char *lim)
@@ -55,12 +55,16 @@ int	heredoc(char *lim)
 	{
 		buff = readline("> ");
 		if (!buff || !ft_memcmp(lim, buff, len + 1))
+		{
+			free(buff);
 			break ;
+		}
 		write(fd[1], buff, ft_strlen(buff));
 		write(fd[1], "\n", 1);
+		free(buff);
 	}
-	signal(SIGINT, param_sig); // Restoring the signale handler for reading from the prompt
+	signal(SIGINT, param_sig);
 	if (!isatty(STDIN_FILENO))
-		return(signal_herdoc(fd), set_statu(1), 0);
+		return (signal_herdoc(fd), set_statu(1), 0);
 	return (close(fd[1]), fd[0]);
 }

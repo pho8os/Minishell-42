@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:38:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 13:07:28 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:56:32 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ void		close_pipe(int fds[2]);
 int			count_words(char *str, char c);
 void		exit_status(int status);
 void		set_statu(int status);
-void		set_statug(int status);
 void		param_sig(int signum);
-char **trans_list(t_token *list, t_env *myenv);
-char *handle_non_valid_variable(char *str, int *i);
-char *handle_env_variable(char *str, t_env *env, int *i, int j);
-char *handle_variable(char *str, t_env *env, int *i);
-char *handle_non_variable(char *str, int *i);
-char *getv(char *str, t_env *env);
+char		**trans_list(t_token *list, t_env *myenv);
+char		*handle_non_valid_variable(char *str, int *i);
+char		*handle_env_variable(char *str, t_env *env, int *i, int j);
+char		*handle_variable(char *str, t_env *env, int *i);
+char		*handle_non_variable(char *str, int *i);
+char		*getv(char *str, t_env *env);
 typedef struct s_vartrans_list
 {
 	int		i;

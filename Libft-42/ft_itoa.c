@@ -6,11 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 05:48:58 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 10:31:24 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:44:21 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 static int	count(int n)
 {
@@ -21,7 +21,7 @@ static int	count(int n)
 		count++;
 	while (n)
 	{
-		count ++;
+		count++;
 		n /= 10;
 	}
 	return (count);
@@ -37,7 +37,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	i = count(n);
 	nb = n;
-	str = gc(sizeof (char) * (i + 1), 1, 0);
+	str = gc(sizeof(char) * (i + 1), 1, 0);
 	str[i] = '\0';
 	if (n < 0)
 		nb = nb * (-1);
@@ -53,7 +53,7 @@ char	*ft_itoa(int n)
 
 char	*itoa_allo(int n)
 {
-int			i;
+	int			i;
 	long int	nb;
 	char		*str;
 
@@ -61,7 +61,7 @@ int			i;
 		return (dup_alloc("0"));
 	i = count(n);
 	nb = n;
-	str = malloc(sizeof (char) * (i + 1));
+	str = malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (str);
 	str[i] = '\0';

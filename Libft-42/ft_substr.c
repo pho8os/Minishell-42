@@ -6,11 +6,11 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:27:06 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 10:28:30 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:40:05 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -34,7 +34,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*sub_malloc(char const *s, unsigned int start, size_t len)
 {
-char			*str;
+	char			*str;
 	size_t			i;
 	unsigned int	slen;
 

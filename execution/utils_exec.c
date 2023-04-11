@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 01:27:00 by yettabaa          #+#    #+#             */
-/*   Updated: 2023/04/10 05:15:45 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:38:56 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	wildcard_change(t_token **list)
 
 void	norme_xpand(t_token **list, t_env *env)
 {
-	t_token *hold;
+	t_token	*hold;
 	t_token	*t;
 	t_token	*t2;
 
@@ -76,7 +76,7 @@ void	norme_xpand(t_token **list, t_env *env)
 			else
 				hold = expand(t2->next->token, env, 1);
 			(t2->next = hold);
-			(t->hdoc) && (t2->next->hdoc = 1); // expinding with wildcard
+			(t->hdoc) && (t2->next->hdoc = 1);
 			(t->down) && (lasttok(t2->next)->down = t->down);
 			lasttok(t2->next)->next = t->next;
 		}
@@ -96,8 +96,8 @@ void	expand_change(t_token **list, t_env *env)
 	{
 		(!t2->hdoc) && (t2 = expand(t2->token, env, 0));
 		(t2->hdoc) && (t2 = expand(t2->token, env, 1));
-		(t->hdoc) && (t2->hdoc = 1); // expinding with wildcard
-		(t->down) && (lasttok(t2)->down = t->down); // expinding with wildcard
+		(t->hdoc) && (t2->hdoc = 1);
+		(t->down) && (lasttok(t2)->down = t->down);
 		return (lasttok(t2)->next = t->next, *list = t2, free(NULL));
 	}
 	norme_xpand(list, env);

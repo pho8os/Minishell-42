@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 06:08:12 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 02:41:31 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:48:25 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*gc(size_t size, int param, int swap)
 		(!mode) && (gcadd_front(&head2, ft_gcnew(address)), mode *= 1);
 		return (address);
 	}
-	if(!param)
+	if (!param)
 		ft_gcclear(&head);
 	return (NULL);
 }

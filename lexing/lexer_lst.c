@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   lexer_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 04:27:20 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/10 05:16:29 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 08:58:12 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "minishell.h"
 
-t_token *ft_newtoken(e_flag type, char *word, int flag, int hdoc)
+t_token	*ft_newtoken(t_flag type, char *word, int flag, int hdoc)
 {
-	t_token *token;
+	t_token	*token;
 
-	token = gc(sizeof(t_token ), 1, 0);
+	token = gc(sizeof(t_token), 1, 0);
 	token->token = word;
 	token->type = type;
 	token->next = NULL;
@@ -27,7 +27,7 @@ t_token *ft_newtoken(e_flag type, char *word, int flag, int hdoc)
 	token->hdoc = false;
 	(flag) && (token->expand = true);
 	(hdoc) && (token->hdoc = true);
-	return(token);
+	return (token);
 }
 
 t_token	*lasttok(t_token *lst)
