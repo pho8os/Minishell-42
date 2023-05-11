@@ -6,7 +6,7 @@
 /*   By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 13:46:23 by absaid            #+#    #+#             */
-/*   Updated: 2023/04/11 07:02:48 by yettabaa         ###   ########.fr       */
+/*   Updated: 2023/04/11 09:22:31 by yettabaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,4 @@ void				delete_node(t_env **head, char *var);
 char				*trim_allo(char const *s1, char const *set);
 char				**split_wc(char *str);
 void				fd_printf(int fd, const char *fmt, ...);
-
 #endif

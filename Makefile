@@ -6,7 +6,7 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 20:58:04 by absaid            #+#    #+#              #
-#    Updated: 2023/04/11 07:52:48 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/11 09:02:15 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ NAME = minishell
 
 READLINE_PATH=$(shell brew --prefix readline)
 
-CFLAGS = -Wall -Wextra -Werror  -Iinclude -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror  -Iinclude -g
 
-HEDER = ./include/builtins.h ./include/execution.h ./include/lexer.h ./include/minishell.h ./include/parser.h ./Libft-42/libft.h
+HEADER = ./include/builtins.h ./include/execution.h ./include/lexer.h ./include/minishell.h ./include/parser.h ./Libft-42/libft.h
 
 LIBFT = Libft-42/libft.a
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 	make -C Libft-42
 	$(CC) $(CFLAGS) $(LIBFT) -L $(READLINE_PATH)/lib -lreadline -o $(NAME) $^
 
-%.o: %.c $(HEDER) 
+%.o: %.c $(HEADER) 
 	$(CC) $(CFLAGS) -I $(READLINE_PATH)/include -c $< -o $@ 
 
 clean:

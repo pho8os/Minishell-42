@@ -6,17 +6,15 @@
 #    By: yettabaa <yettabaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 07:27:30 by absaid            #+#    #+#              #
-#    Updated: 2023/04/11 05:09:47 by yettabaa         ###   ########.fr        #
+#    Updated: 2023/04/11 09:02:52 by yettabaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 NAME = libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isdigit.c \
 ft_itoa.c  ft_strncmp.c ft_memcmp.c ft_strlen.c \
